@@ -86,7 +86,7 @@
         $servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "peepee";
+        $dbname = " accounts";
 
         $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -101,7 +101,7 @@
             if ($pw != $conf_pw) {
                 echo "<script>showError('Passwords do not match!');</script>";
             } else {
-                $sql = "INSERT INTO user_log1 (user_name, email, pass_word, conf_pass_word)
+                $sql = "INSERT INTO user_info (username, email, password, conf_password)
                         VALUES('$user_name', '$email', '$pw', '$conf_pw')";
                 
                 if ($conn->query($sql) === TRUE) {
