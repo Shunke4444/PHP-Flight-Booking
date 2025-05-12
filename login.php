@@ -1,3 +1,69 @@
+<?php
+session_start();
+$conn = new mysqli("localhost", "root", "", " accounts");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $input = $_POST["username_or_email"];
+    $password = $_POST["password"];
+
+    $stmt = $conn->prepare("SELECT id, username, password, failed_attempts, locked_until FROM user_info WHERE username=? OR email=?");
+    $stmt->bind_param("ss", $input, $input);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        if ($user['locked_until'] && strtotime($user['locked_until']) > time()) {
+            echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showError('Account locked. Try again later.');
+                    });
+                </script>";
+        } else {
+            if ($password == $user['password']) {
+                $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=0, locked_until=NULL WHERE id=?");
+                $stmt->bind_param("i", $user['id']);
+                $stmt->execute();
+
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                header("Location: mockup_page.php");
+                exit;
+            } else {
+                $failed = $user['failed_attempts'] + 1;
+                $lockTime = NULL;
+
+                if ($failed >= 5) {
+                    $lockTime = date("Y-m-d H:i:s", time() + 5 * 60);
+                    echo "<script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                showError('Too many attempts. Account locked for 5 minutes.');
+                            });
+                        </script>";
+                } else {
+                    echo "<script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                showError('Incorrect password');
+                            });
+                        </script>";
+                }
+
+                $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=?, locked_until=? WHERE id=?");
+                $stmt->bind_param("isi", $failed, $lockTime, $user['id']);
+                $stmt->execute();
+            }
+        }
+    } else {
+        echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    showError('Account not found');
+                });
+            </script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +76,8 @@
 <body>
 
     <main class="fullscreen-container">
-        <!-- FORM ON THE LEFT -->
         <section class="form-panel">
-            <form id="loginForm" method="post">
+            <form id="loginForm" method="post"> 
                 <h2>Login</h2>
                 <article class="social-buttons">
                     <button type="button" class="social-btn">
@@ -29,16 +94,18 @@
                 <p class="divider">Or use your email to log in</p>
                 
                 <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <input type="text" id="username_or_email" name="username_or_email" placeholder="Username/Email" required>
                 </div>
                 
                 <div class="form-group">
                     <input type="password" id="password" name="password" placeholder="Password" required>
                 </div>
-                <!-- do funni login after dis for testing lang tong a href -->
-                <button type="submit" class="primary-btn"><a href="mockup_page.php">Login</a></button>
+                <button type="submit" class="primary-btn">Login</button>
                 <div class="login-prompt">
-                    <p>New here? <a href="test.php">Sign Up</a></p>
+                    <p>New here? <a href="index.php">Sign Up</a></p>
+                </div>
+                <div class="login-prompt">
+                    <p>Forgot your password? <a href="forgot_password.php">Reset</a></p>
                 </div>
             </form>
         </section>
@@ -50,8 +117,7 @@
             </span>
         </section>
     </main>
-    <!-- maybe gawin ko modal if needed  -->
-    <!-- <article id="errorModal" class="modal">
+    <article id="errorModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Error</h2>
@@ -64,10 +130,11 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Success!</h2>
-            <p>Login completed successfully.</p>
+            <p>Registration completed successfully.</p>
             <button class="modal-btn">OK</button>
         </div>
-    </article> -->
+    </article>
+    <script src="script.js"></script>
 
 </body>
 </html>
