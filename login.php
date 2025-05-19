@@ -1,67 +1,67 @@
 <?php
-session_start();
-$conn = new mysqli("localhost", "root", "", " accounts");
+// session_start();
+// $conn = new mysqli("localhost", "root", "", " accounts");
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $input = $_POST["username_or_email"];
-    $password = $_POST["password"];
+// if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//     $input = $_POST["username_or_email"];
+//     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT id, username, password, failed_attempts, locked_until FROM user_info WHERE username=? OR email=?");
-    $stmt->bind_param("ss", $input, $input);
-    $stmt->execute();
-    $result = $stmt->get_result();
+//     $stmt = $conn->prepare("SELECT id, username, password, failed_attempts, locked_until FROM user_info WHERE username=? OR email=?");
+//     $stmt->bind_param("ss", $input, $input);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
+//     if ($result->num_rows === 1) {
+//         $user = $result->fetch_assoc();
 
-        if ($user['locked_until'] && strtotime($user['locked_until']) > time()) {
-            echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        showError('Account locked. Try again later.');
-                    });
-                </script>";
-        } else {
-            if ($password == $user['password']) {
-                $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=0, locked_until=NULL WHERE id=?");
-                $stmt->bind_param("i", $user['id']);
-                $stmt->execute();
+//         if ($user['locked_until'] && strtotime($user['locked_until']) > time()) {
+//             echo "<script>
+//                     document.addEventListener('DOMContentLoaded', function() {
+//                         showError('Account locked. Try again later.');
+//                     });
+//                 </script>";
+//         } else {
+//             if ($password == $user['password']) {
+//                 $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=0, locked_until=NULL WHERE id=?");
+//                 $stmt->bind_param("i", $user['id']);
+//                 $stmt->execute();
 
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                header("Location: mockup_page.php");
-                exit;
-            } else {
-                $failed = $user['failed_attempts'] + 1;
-                $lockTime = NULL;
+//                 $_SESSION['user_id'] = $user['id'];
+//                 $_SESSION['username'] = $user['username'];
+//                 header("Location: mockup_page.php");
+//                 exit;
+//             } else {
+//                 $failed = $user['failed_attempts'] + 1;
+//                 $lockTime = NULL;
 
-                if ($failed >= 5) {
-                    $lockTime = date("Y-m-d H:i:s", time() + 5 * 60);
-                    echo "<script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                showError('Too many attempts. Account locked for 5 minutes.');
-                            });
-                        </script>";
-                } else {
-                    echo "<script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                showError('Incorrect password');
-                            });
-                        </script>";
-                }
+//                 if ($failed >= 5) {
+//                     $lockTime = date("Y-m-d H:i:s", time() + 5 * 60);
+//                     echo "<script>
+//                             document.addEventListener('DOMContentLoaded', function() {
+//                                 showError('Too many attempts. Account locked for 5 minutes.');
+//                             });
+//                         </script>";
+//                 } else {
+//                     echo "<script>
+//                             document.addEventListener('DOMContentLoaded', function() {
+//                                 showError('Incorrect password');
+//                             });
+//                         </script>";
+//                 }
 
-                $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=?, locked_until=? WHERE id=?");
-                $stmt->bind_param("isi", $failed, $lockTime, $user['id']);
-                $stmt->execute();
-            }
-        }
-    } else {
-        echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    showError('Account not found');
-                });
-            </script>";
-    }
-}
+//                 $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=?, locked_until=? WHERE id=?");
+//                 $stmt->bind_param("isi", $failed, $lockTime, $user['id']);
+//                 $stmt->execute();
+//             }
+//         }
+//     } else {
+//         echo "<script>
+//                 document.addEventListener('DOMContentLoaded', function() {
+//                     showError('Account not found');
+//                 });
+//             </script>";
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>

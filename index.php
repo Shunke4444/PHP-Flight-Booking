@@ -1,43 +1,43 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = " accounts";
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $servername = "localhost";
+//     $username = "root";
+//     $password = "";
+//     $dbname = " accounts";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+//     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($conn->connect_error) {
-        echo "<script>showError('Database connection failed');</script>";
-    } else {
-        $user_name = $_POST["username"];
-        $email = $_POST["email"];
-        $pw = $_POST["password"];
-        $conf_pw = $_POST["confirm_password"];
+//     if ($conn->connect_error) {
+//         echo "<script>showError('Database connection failed');</script>";
+//     } else {
+//         $user_name = $_POST["username"];
+//         $email = $_POST["email"];
+//         $pw = $_POST["password"];
+//         $conf_pw = $_POST["confirm_password"];
 
-        if ($pw != $conf_pw) {
-            echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    showError('Passwords do not match!');
-                });
-            </script>";
-        } else {
-            $sql = "INSERT INTO user_info (username, email, password, conf_password)
-                    VALUES('$user_name', '$email', '$pw', '$conf_pw')";
+//         if ($pw != $conf_pw) {
+//             echo "<script>
+//                 document.addEventListener('DOMContentLoaded', function() {
+//                     showError('Passwords do not match!');
+//                 });
+//             </script>";
+//         } else {
+//             $sql = "INSERT INTO user_info (username, email, password, conf_password)
+//                     VALUES('$user_name', '$email', '$pw', '$conf_pw')";
             
-            if ($conn->query($sql) === TRUE) {
-                echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        showSuccess();
-                    });
-                </script>";
-            } else {
-                echo "<script>showError('Registration failed');</script>";
-            }
-        }
-        $conn->close();
-    }
-}
+//             if ($conn->query($sql) === TRUE) {
+//                 echo "<script>
+//                     document.addEventListener('DOMContentLoaded', function() {
+//                         showSuccess();
+//                     });
+//                 </script>";
+//             } else {
+//                 echo "<script>showError('Registration failed');</script>";
+//             }
+//         }
+//         $conn->close();
+//     }
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>

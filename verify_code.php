@@ -1,44 +1,44 @@
 <?php
-session_start();
-if (!isset($_SESSION['reset_email'])) {
-    header("Location: forgot_password.php");
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION['reset_email'])) {
+//     header("Location: forgot_password.php");
+//     exit;
+// }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['verify'])) {
-    $email = $_SESSION['reset_email'];
-    $code = $_POST['reset_code'];
+// if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['verify'])) {
+//     $email = $_SESSION['reset_email'];
+//     $code = $_POST['reset_code'];
 
-    $conn = new mysqli("localhost", "root", "", " accounts");
+//     $conn = new mysqli("localhost", "root", "", " accounts");
 
-    $stmt = $conn->prepare("SELECT reset_expiry FROM user_info WHERE email=? AND reset_code=?");
-    $stmt->bind_param("ss", $email, $code);
-    $stmt->execute();
-    $stmt->store_result();
+//     $stmt = $conn->prepare("SELECT reset_expiry FROM user_info WHERE email=? AND reset_code=?");
+//     $stmt->bind_param("ss", $email, $code);
+//     $stmt->execute();
+//     $stmt->store_result();
 
-    if ($stmt->num_rows > 0) {
-        $stmt->bind_result($expiry);
-        $stmt->fetch();
+//     if ($stmt->num_rows > 0) {
+//         $stmt->bind_result($expiry);
+//         $stmt->fetch();
 
-        if (strtotime($expiry) >= time()) {
-            // code is valid
-            $_SESSION['reset_code'] = $code;
-            header("Location: change_password.php");
-        } else {
-            echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    showError('Code expired');
-                });
-            </script>";
-        }
-    } else {
-        echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    showError('Invalid code!');
-                });
-            </script>";
-    }
-}
+//         if (strtotime($expiry) >= time()) {
+//             // code is valid
+//             $_SESSION['reset_code'] = $code;
+//             header("Location: change_password.php");
+//         } else {
+//             echo "<script>
+//                 document.addEventListener('DOMContentLoaded', function() {
+//                     showError('Code expired');
+//                 });
+//             </script>";
+//         }
+//     } else {
+//         echo "<script>
+//                 document.addEventListener('DOMContentLoaded', function() {
+//                     showError('Invalid code!');
+//                 });
+//             </script>";
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
