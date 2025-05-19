@@ -2,15 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body, html {
-  font-family: Arial, sans-serif;
+  font-family: 'Libre Franklin', sans-serif;
 }
 
 .hero {
   position: relative;
-  height: 50vh;
+  height: 60vh;
   background-image: url(../assets/hero.jpg);
   background-size: cover;
   background-position: center;
@@ -18,7 +19,7 @@ body, html {
   flex-direction: column;
   background-blend-mode: darken;
   overflow: hidden;
-  justify-content: center;   /* Center children vertically */
+  justify-content: center;   
   align-items: center;   
 }
 
@@ -30,14 +31,13 @@ body, html {
   height: 100%;
 background: linear-gradient(
   to right,
-  rgba(27, 55, 68, 0.9) 20%,      /* deep blue at far left */
-  rgba(61, 90, 100, 0.3) 90%,   /* softer blue farther along */
-  rgba(88, 132, 146, 0) 100%     /* fully transparent near end */
+  rgba(27, 55, 68, 0.9) 20%,      
+  rgba(61, 90, 100, 0.3) 90%,  
+  rgba(88, 132, 146, 0) 100%    
 );
 
   z-index: 1;
 }
-
 
 .navbar {
   display: flex;
@@ -47,6 +47,14 @@ background: linear-gradient(
   background: rgb(255, 255, 255);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   color: rgb(0, 0, 0);
+  position: relative;
+  overflow-y: hidden;
+  
+}
+
+.nav-text{
+  margin-left: 0.5em;
+  display: inline;
 }
 
 .nav-left, .nav-right {
@@ -58,12 +66,32 @@ background: linear-gradient(
 .nav-link {
   text-decoration: none;
   color: black;
+  transition: transform 0.2s cubic-bezier(.4,2,.6,1);
+  display: inline;
+}
+
+.nav-link:hover{
+  transform: translateY(-1px);
+}
+
+.icon{
+  display: flex;
+  align-items: center;  
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  position: absolute;
+  padding-top: 0.50rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
+.logo img {
+  width: 12rem;
+  height: auto;
+  object-fit: contain;
+}
+
 
 .logo span {
   color: lightgreen;
@@ -76,6 +104,8 @@ background: linear-gradient(
   color: rgb(255, 255, 255);
   border-radius: 5px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .hero-text {
@@ -83,10 +113,9 @@ background: linear-gradient(
   color: #fff;
   padding: 2rem 0.5rem;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 30rem;
   margin-left: 7rem;   
   align-self: flex-start;
-
 }
 
 .hero-text h1 {
@@ -101,14 +130,118 @@ background: linear-gradient(
 }
 
 
-@media (max-width: 480px) {
+
+
+/* world loc */
+
+
+.world-loc {
+  display: flex;
+  flex-direction: column;
+}
+
+.world-loc-content {
+  z-index: 2;
+  color: #000000;
+  margin-bottom: 0.25rem;
+  padding: 3rem 7rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.world-loc-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.world-loc-text h1 {
+  font-size: 3.25rem;
+  margin-bottom: 0.25rem; 
+  font-weight: 400;
+}
+
+.world-loc-text p {
+  margin: 0; 
+}
+
+.world-banner {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-image: url(../assets/world-locations.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  margin-top: -13rem;
+}
+
+.btn-container {
+  flex: 0 0 auto; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0; 
+}
+
+.explore-btn {
+  color: #000000;
+  border: 2px solid #5a788b;
+  border-radius: 5px;
+  height: 3rem;
+  width: 5rem;
+  font-weight: 100;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.15s, color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.explore-btn{
+  text-decoration: none;
+  color: #000000;
+  font-size: 1rem;
+}
+
+.explore-btn:hover {
+  color: #000000;
+  transform: translateY(-5px); 
+}
+
+@media (max-width: 600px) {
   .navbar {
-    flex-direction: column;
+    flex-direction: row;
     padding: 12px 10px;
     gap: 10px;
   }
   .nav-left, .nav-right {
     gap: 10px;
+  }
+  .nav-text {
+    display: none;
+  }
+  .logout i {
+    margin-left: 4px;
+  }
+  .icon i {
+    background: rgb(48, 98, 121);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 2px 8px rgba(46,204,113,0.08);
+    transition: background 0.2s;
+    padding: 0;
+  }
+  .icon i:hover {
+    background: rgb(27, 55, 68);
   }
   .hero {
     height: auto;
@@ -129,9 +262,41 @@ background: linear-gradient(
     text-align: center;
   }
   .hero-text h1 {
-    font-size: 1.4rem;
+    font-size: 2.25em;
   }
   .hero-text p {
     font-size: 1rem;
   }
+
+
+  /* world-loc */
+  .world-loc-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 12rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    max-width: 98vw;
+  }
+  .world-loc-text,
+  .btn-container {
+    width: auto;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .world-loc-text h1 {
+    font-size: 2.25em;
+    margin-bottom: 0.5rem; 
+  }
+
+  .world-loc-text p {
+    font-size: 1rem;
+  }
+
+
 }
