@@ -24,22 +24,20 @@
     <nav class="navbar">
          <div class="nav-left">
           <span class="icon">
-            <a href="#" class="nav-link">
+            <a href="destinations.php" class="nav-link">
               <i class="fa-solid fa-map"></i>
               <span class="nav-text">Destinations</span>
             </a>        
           </span>
 
           <span class="icon">
-            <a href="#" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
+            <a href="travelLog.php" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
           </span>
 
           <span class="icon">
-            <a href="#" class="nav-link"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
+            <a href="travelPlanner.php" class="nav-link"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
           </span>
       </div>  
-
-
 
    <div class="logo">
       <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
@@ -59,7 +57,6 @@
       <h1>Make your travel wishlist, we'll do the rest.</h1>
       <p>Special places for your special self.
       </p>
-    
     </div>
   </section>
 
@@ -70,7 +67,7 @@
       <p>Discover new places with our smart travel planner.</p>
     </span>
   <span class="btn-container">
-    <a href="#" class="explore-btn">Book now!</a>
+    <a href="travelPlanner.php" class="explore-btn">Book now!</a>
   </span>
   </article>
 
@@ -85,7 +82,7 @@
     </span>
 
     <span class="travel-btn-container">
-      <a href="#" class="travel-btn">Book now</a>
+      <a href="travelPlanner.php" class="travel-btn">Book now</a>
     </span>
   </article>
 
@@ -96,7 +93,7 @@
       <p>Explore the highest peaks!</p>
       <footer class="card-footer">
         <span class="price">$700</span>
-        <button class="book-btn">More Information</button>
+        <a href="#"class="book-btn">More Information</a>
       </footer>
     </div>
 
@@ -106,7 +103,7 @@
       <p>Explore the beauty of nature!</p>
       <footer class="card-footer">
         <span class="price">$600</span>
-        <button class="book-btn">More Information</button>
+        <a href="#"class="book-btn">More Information</a>
       </footer>
     </div>
 
@@ -116,7 +113,7 @@
       <p>Explore the world in your own pace</p>
       <footer class="card-footer">
         <span class="price">$350</span>
-        <button class="book-btn">More Information</button>
+        <a href="#"class="book-btn">More Information</a>
       </footer>
     </div>
 
@@ -126,7 +123,7 @@
       <p>An energetic party with your loved ones!</p>
       <footer class="card-footer">
         <span class="price">$350</span>
-        <button class="book-btn">More Information</button>
+        <a href="#"class="book-btn">More Information</a>
       </footer>
     </div>    
   </article>
