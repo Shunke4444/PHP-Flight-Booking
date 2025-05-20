@@ -51,6 +51,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
+   
 window.showError = showError;
 window.showSuccess = showSuccess;
