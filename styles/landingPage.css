@@ -300,6 +300,7 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .price {
@@ -309,7 +310,7 @@ body, html {
 }
 
 .book-btn {
-  padding: 8px 16px;
+  padding: 10px 15px;
   background-color: #91d4b2;
   border: none;
   border-radius: 6px;

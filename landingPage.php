@@ -24,12 +24,6 @@
     <nav class="navbar">
       <div class="nav-left">
         <span class="icon">
-          <a href="destinations.php" class="nav-link">
-            <i class="fa-solid fa-map"></i>
-            <span class="nav-text">Destinations</span>
-          </a>        
-        </span>
-        <span class="icon">
           <a href="travelLog.php" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
         </span>
         <span class="icon">
@@ -72,7 +66,7 @@
   <section class="travel">
     <article class="travel-text">
       <span class="travel-text-content">
-        <h1>Enjoy fun activities!</h1>
+        <h1>Enjoy our exclusive destinations!</h1>
         <p>We are here to make your travel experience unforgettable.</p>
       </span>
       <span class="travel-btn-container">
@@ -84,7 +78,7 @@
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/ScalingMountain.jpg" alt="Melbourne" />
         <h2>Scaling Mountains</h2>
-        <p>Explore the highest peaks!</p>
+        <p>Explore the highest peaks at the great America!</p>
         <footer class="card-footer">
           <span class="price">₱7000</span>
           <a href="#" class="book-btn">More Information</a>
@@ -93,7 +87,7 @@
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/Hiking.jpeg" alt="Paris" />
         <h2>Hiking</h2>
-        <p>Explore the beauty of nature!</p>
+        <p>Explore the beauty of nature within Greenland!</p>
         <footer class="card-footer">
           <span class="price">₱6000</span>
           <a href="#" class="book-btn">More Information</a>
@@ -102,7 +96,7 @@
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/Cycling.webp" alt="London" />
         <h2>Cycling</h2>
-        <p>Explore the world in your own pace</p>
+        <p>Explore the Great Britain in your own pace!</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
           <a href="#" class="book-btn">More Information</a>
@@ -111,7 +105,7 @@
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/DrinkingParty.webp" alt="London" />
         <h2>Outdoor Party</h2>
-        <p>An energetic party with your loved ones!</p>
+        <p>An energetic party with your loved ones in the Bahamas!</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
           <a href="#" class="book-btn">More Information</a>
