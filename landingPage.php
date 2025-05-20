@@ -23,18 +23,23 @@
   <header class="nav-header">
     <nav class="navbar">
          <div class="nav-left">
+          <span class="icon">
+            <a href="#" class="nav-link">
+              <i class="fa-solid fa-map"></i>
+              <span class="nav-text">Destinations</span>
+            </a>        
+          </span>
 
-        <span class="icon">
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-plane"></i>
-            <span class="nav-text">Find Flight</span>
-          </a>
+          <span class="icon">
+            <a href="#" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
+          </span>
 
-        </span>
-        <span class="icon">
-          <a href="#" class="nav-link"><i class="fa-solid fa-map"></i><span class="nav-text">Find Stays</span></a>
-        </span>
+          <span class="icon">
+            <a href="#" class="nav-link"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
+          </span>
       </div>  
+
+
 
    <div class="logo">
       <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
@@ -65,14 +70,108 @@
       <p>Discover new places with our smart travel planner.</p>
     </span>
   <span class="btn-container">
-    <a class="explore-btn">Explore</a>
+    <a href="#" class="explore-btn">Book now!</a>
   </span>
   </article>
-  <aside class="world-banner"></aside>
 
+  <aside class="world-banner"></aside>
+</section>
+
+<section class="travel">
+  <article class="travel-text">
+    <span class="travel-text-content">
+      <h1>Enjoy fun activities!</h1>
+      <p>We are here to make your travel experience unforgettable.</p>
+    </span>
+
+    <span class="travel-btn-container">
+      <a href="#" class="travel-btn">Book now</a>
+    </span>
+  </article>
+
+  <article class="travel-cards-container">
+    <div class="travel-card">
+      <img src="../PHP-Flight-Booking/assets/ScalingMountain.jpg" alt="Melbourne" />
+      <h2>Scaling Mountains</h2>
+      <p>An amazing journey</p>
+      <footer class="card-footer">
+        <span class="price">$700</span>
+        <button class="book-btn">More Information</button>
+      </footer>
+    </div>
+
+    <div class="travel-card">
+      <img src="../PHP-Flight-Booking/assets/Hiking.jpeg" alt="Paris" />
+      <h2>Hiking</h2>
+      <p>A Paris Adventure</p>
+      <footer class="card-footer">
+        <span class="price">$600</span>
+        <button class="book-btn">More Information</button>
+      </footer>
+    </div>
+
+    <div class="travel-card">
+      <img src="../PHP-Flight-Booking/assets/Cycling.webp" alt="London" />
+      <h2>Cycling</h2>
+      <p>London eye adventure</p>
+      <footer class="card-footer">
+        <span class="price">$350</span>
+        <button class="book-btn">More Information</button>
+      </footer>
+    </div>
+
+     <div class="travel-card">
+      <img src="../PHP-Flight-Booking/assets/DrinkingParty.webp" alt="London" />
+      <h2>Outdoor Party</h2>
+      <p>London eye adventure</p>
+      <footer class="card-footer">
+        <span class="price">$350</span>
+        <button class="book-btn">More Information</button>
+      </footer>
+    </div>    
+  </article>
 </section>
 
 
+ <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-column">
+        <span class="foot-logo">
+          <img src="../PHP-Flight-Booking//assets/LOGO.png" alt="">
+        </span>
+      </div>
+      <div class="footer-column">
+        <p><strong>SERVICES</strong></p>
+        <p>Final Requirment, Compass Website</p>
+      </div>
+      <div class="footer-column">
+        <p><strong>GROUP 9</strong></p>
+        <p>WIDGETKIT</p>
+        <p>SUPPORT</p>
+      </div>
+      <div class="footer-column">
+        <p><strong>ABOUT US</strong></p>
+        <p>JIHAD TEJAM</p>
+        <p>GABRIEL VINCULADO</p>
+        <p>PATRICK SANTIAGO</p>
+        <p>MARK SANTOS</p>
+        <p>ASHLEY VASCO</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-rss"></i></a>
+        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#"><i class="fab fa-flickr"></i></a>
+      </div>
+      <p>&copy; Copyright. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
