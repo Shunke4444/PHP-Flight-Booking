@@ -77,8 +77,8 @@
     <article class="travel-cards-container">
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/ScalingMountain.jpg" alt="Melbourne" />
-        <h2>Scaling Mountains</h2>
-        <p>Explore the highest peaks at the great America!</p>
+        <h2>Climbing Myongming's Devil Tower</h2>
+        <p>Explore the highest peaks, challenge and conquer them!</p>
         <footer class="card-footer">
           <span class="price">₱7000</span>
           <a href="#" class="book-btn">More Information</a>
@@ -95,8 +95,8 @@
       </div>
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/Cycling.webp" alt="London" />
-        <h2>Cycling</h2>
-        <p>Explore the Great Britain in your own pace!</p>
+        <h2>Cycling in New Zealand</h2>
+        <p>Shred NZ’s scenery, mountains, and hidden trails suited for adrenaline-fueled riders.</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
           <a href="#" class="book-btn">More Information</a>
@@ -104,8 +104,8 @@
       </div>
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/DrinkingParty.webp" alt="London" />
-        <h2>Outdoor Party</h2>
-        <p>An energetic party with your loved ones in the Bahamas!</p>
+        <h2>Summertime in South California</h2>
+        <p>An energetic party with your loved ones!</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
           <a href="#" class="book-btn">More Information</a>
