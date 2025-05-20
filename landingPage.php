@@ -93,7 +93,7 @@
     <div class="travel-card">
       <img src="../PHP-Flight-Booking/assets/ScalingMountain.jpg" alt="Melbourne" />
       <h2>Scaling Mountains</h2>
-      <p>An amazing journey</p>
+      <p>Explore the highest peaks!</p>
       <footer class="card-footer">
         <span class="price">$700</span>
         <button class="book-btn">More Information</button>
@@ -103,7 +103,7 @@
     <div class="travel-card">
       <img src="../PHP-Flight-Booking/assets/Hiking.jpeg" alt="Paris" />
       <h2>Hiking</h2>
-      <p>A Paris Adventure</p>
+      <p>Explore the beauty of nature!</p>
       <footer class="card-footer">
         <span class="price">$600</span>
         <button class="book-btn">More Information</button>
@@ -113,7 +113,7 @@
     <div class="travel-card">
       <img src="../PHP-Flight-Booking/assets/Cycling.webp" alt="London" />
       <h2>Cycling</h2>
-      <p>London eye adventure</p>
+      <p>Explore the world in your own pace</p>
       <footer class="card-footer">
         <span class="price">$350</span>
         <button class="book-btn">More Information</button>
@@ -123,7 +123,7 @@
      <div class="travel-card">
       <img src="../PHP-Flight-Booking/assets/DrinkingParty.webp" alt="London" />
       <h2>Outdoor Party</h2>
-      <p>London eye adventure</p>
+      <p>An energetic party with your loved ones!</p>
       <footer class="card-footer">
         <span class="price">$350</span>
         <button class="book-btn">More Information</button>
