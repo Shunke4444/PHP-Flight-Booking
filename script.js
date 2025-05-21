@@ -6,13 +6,13 @@ function showError(message) {
         errorModal.style.display = 'block';
     }
 }
-
 function showSuccess() {
     const successModal = document.getElementById('successModal');
     if (successModal) {
         successModal.style.display = 'block';
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registrationForm');
@@ -49,6 +49,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.target.classList.contains('modal')) {
             closeModal();
         }
+    });
+
+    // Sign Up
+    const passwordInputSignUp = document.getElementById("passwordSignUp");
+    const passwordInputConfirmation = document.getElementById("confirm_passwordSignUp");
+    const showPasswordCheckboxSignUp = document.getElementById("showPasswordSignUp");
+
+    showPasswordCheckboxSignUp.addEventListener("change", function () {
+        if(this.checked){
+            passwordInputSignUp.type = "text";
+            passwordInputConfirmation.type = "text";
+        } else{
+            passwordInputSignUp.type = "password";
+            passwordInputConfirmation.type = "password";
+        }
+    });
+
+    // Login 
+    const passwordInput = document.getElementById("password");
+    const showPasswordCheckbox = document.getElementById("showPassword");
+
+    showPasswordCheckbox.addEventListener("change", function () {
+        passwordInput.type = this.checked ? "text" : "password";
     });
 });
    
