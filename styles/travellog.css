@@ -1,0 +1,270 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Libre Franklin", sans-serif;
+}
+
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  color: rgb(0, 0, 0);
+  position: relative;
+  overflow-y: hidden;
+  margin-bottom: 5rem;
+}
+
+.nav-text{
+  margin-left: 0.5em;
+  display: inline;
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 20px;
+  color: black;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  transition: transform 0.2s cubic-bezier(.4,2,.6,1);
+  display: inline;
+}
+
+.nav-link:hover{
+  transform: translateY(-1px);
+}
+
+.icon{
+  display: flex;
+  align-items: center;  
+}
+
+.logo {
+  position: absolute;
+  padding-top: 0.50rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo img {
+  width: 12rem;
+  height: auto;
+  object-fit: contain;
+}
+
+.logo span {
+  color: lightgreen;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.input-section, .travel-log {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.travel-log ul {
+    list-style-type: none;
+}
+
+.travel-log li {
+    background-color: #f4f4f4;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.travel-log li h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.travel-log li .date {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.travel-log li .notes {
+    margin-bottom: 1.5rem;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.image-preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #91d4b2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: #f7f7f7;
+}
+
+.travel-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.travel-images img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: transform 0.3s;
+}
+
+.travel-images img:hover {
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10%;
+    width: 2rem;  
+    height: 3rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn i {
+    font-size: 1; 
+}
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 600px) {
+    .input-section, .travel-log {
+        padding: 1.5rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .travel-images img {
+        width: 100px;
+        height: 100px;
+    }
+     .navbar {
+    flex-direction: row;
+    padding: 12px 10px;
+    gap: 10px;
+    }
+    .nav-left, .nav-right {
+        gap: 10px;
+    }
+    .nav-text {
+        display: none;
+    }
+    .logout i {
+        margin-left: 4px;
+    }
+    .icon i {
+        background: rgb(48, 98, 121);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        box-shadow: 0 2px 8px rgba(46,204,113,0.08);
+        transition: background 0.2s;
+        padding: 0;
+    }
+    .icon i:hover {
+        background: rgb(27, 55, 68);
+    }
+}

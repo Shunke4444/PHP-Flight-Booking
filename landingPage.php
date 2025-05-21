@@ -31,7 +31,9 @@
         </span>
       </div>  
       <div class="logo">
-        <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
+        <a href="../PHP-Flight-Booking/landingPage.php">
+          <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
+        </a>
       </div>
       <div class="nav-right">
         <button class="logout">
@@ -53,7 +55,7 @@
   <section class="world-loc">
     <article class="world-loc-content">
       <span class="world-loc-text">
-        <h1>Explore World Destinations</h1>
+        <h1>Explore the world with Compass!</h1>
         <p>Discover new places with our smart travel planner.</p>
       </span>
       <span class="btn-container">
@@ -81,7 +83,7 @@
         <p>Explore the highest peaks, challenge and conquer them!</p>
         <footer class="card-footer">
           <span class="price">₱7000</span>
-          <a href="#" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/destinations/myongming.php" class="book-btn">More Information</a>
         </footer>
       </div>
       <div class="travel-card">
@@ -90,7 +92,7 @@
         <p>Explore the beauty of nature within Greenland!</p>
         <footer class="card-footer">
           <span class="price">₱6000</span>
-          <a href="#" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/destinations/greenland.php" class="book-btn">More Information</a>
         </footer>
       </div>
       <div class="travel-card">
@@ -99,7 +101,7 @@
         <p>Shred NZ’s scenery, mountains, and hidden trails suited for adrenaline-fueled riders.</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
-          <a href="#" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/destinations/newzealand.php" class="book-btn">More Information</a>
         </footer>
       </div>
       <div class="travel-card">
@@ -108,7 +110,7 @@
         <p>An energetic party with your loved ones!</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
-          <a href="#" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/destinations/southcalifornia.php" class="book-btn">More Information</a>
         </footer>
       </div>    
     </article>
