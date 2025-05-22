@@ -46,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 $failed = $user['failed_attempts'] + 1;
                 $lockTime = NULL;
-
                 if ($failed >= 5) {
                     $lockTime = date("Y-m-d H:i:s", time() + 5 * 60);
                     echo "<script>
