@@ -119,18 +119,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: signUpConfirmation.php");
 
 
-            // $sql = "INSERT INTO user_info (username, email, password, conf_password)
-            //         VALUES('$user_name', '$email', '$pw', '$conf_pw')";
+            $sql = "INSERT INTO user_info (username, email, password, conf_password)
+                    VALUES('$user_name', '$email', '$pw', '$conf_pw')";
         
-            // if ($conn->query($sql) === TRUE) {
-            //     echo "<script>
-            //         document.addEventListener('DOMContentLoaded', function() {
-            //             showSuccess();
-            //         });
-            //     </script>";
-            // } else {
-            //     echo "<script>showError('Registration failed');</script>";
-            // }
+            if ($conn->query($sql) === TRUE) {
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showSuccess();
+                    });
+                </script>";
+            } else {
+                echo "<script>showError('Registration failed');</script>";
+            }
         }
     }
 }
@@ -141,8 +141,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type='image/png' href="assets/ICON.png">
+    <link rel="stylesheet" href="styles/signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5756001ff6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="icon" type='image/png' href="assets/ICON.png">
+    <link rel="stylesheet" href="styles/signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5756001ff6.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -150,27 +165,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="welcome-panel">
             <span class="welcome-content">
                 <h1>New Here?</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, dicta. put vector here</p>
-                <button class="outline-btn">SIGN UP</button>
+                <p>Your adventure starts here. Discover new destinations, plan unforgettable journeys, and capture your travel memories—all in one place. Let’s explore the world together!</p>                <button class="outline-btn">SIGN UP</button>
             </span>
         </section>
 
         <section class="form-panel">
             <form id="registrationForm" method="post">
                 <h2>Sign Up</h2>
-                
-                <article class="social-buttons">
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-google"></i>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-twitter"></i>
-                    </button>
-                </article>
-                
                 <p class="divider">Or use your email for registration</p>
                 
                 <div class="form-group">
@@ -181,17 +182,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group password-group">
                     <input type="password" id="passwordSignUp" name="password" placeholder="Password" required>
+                    <span class="toggle-password" toggle="#passwordSignUp">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
-                
-                <div class="form-group">
+                <div class="form-group password-group">
                     <input type="password" id="confirm_passwordSignUp" name="confirm_password" placeholder="Confirm Password" required>
+                    <span class="toggle-password" toggle="#confirm_passwordSignUp">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
-                <input type="checkbox" id="showPasswordSignUp"> Show Password
-                
-                <button type="submit" class="primary-btn">Sign Up</button>
-                
+
+                <button type="submit" class="primary-btn">Sign Up</button>                
                 <div class="login-prompt">
                     <p>One of us? <a href="login.php">Login</a></p>
                 </div>
@@ -217,6 +221,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </article>
 
+ 
     <script src="script.js"></script>
+</body>
+</html>
 </body>
 </html>

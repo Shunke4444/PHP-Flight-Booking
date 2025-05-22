@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #567e6a;
+    --primary-color: #567e6a;;
     --secondary-color: #34A853;
     --error-color: #EA4335;
     --text-color: #333;
@@ -30,22 +30,9 @@ body, html {
     width: 100vw;
 }
 
-.form-panel {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    background: white;
-    overflow-y: auto;
-
-}
-
 .welcome-panel {
     flex: 1;
-    background-image: url(../assets/chocolate-hills-bohol-philippines.jpg);
-    background-size: cover;
-    background-position: center;
+    background-image: url(../assets//BEACH.png);
     color: white;
     display: flex;
     justify-content: center;
@@ -55,22 +42,10 @@ body, html {
     overflow: hidden;
 }
 
-/* Add this for a dark overlay */
-.welcome-panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.35); /* Adjust opacity as needed */
-    z-index: 1;
-}
-
 .welcome-content {
     max-width: 500px;
     text-align: center;
     z-index: 2;
-    padding: 2rem;
-    border-radius: 16px;
-    position: relative;
 }
 
 .welcome-panel h1 {
@@ -83,6 +58,20 @@ body, html {
     margin-bottom: 30px;
     opacity: 0.9;
     font-size: 1.1rem;
+}
+
+.form-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background: white;
+    overflow-y: auto;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
 }
 
 form {
@@ -163,11 +152,11 @@ input {
 input:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(86, 126, 106, 0.2);
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
 }
 
 .primary-btn {
-    background-color: #91d4b2;
+    background-color: #91d4b2;;
     color: white;
     border: none;
     padding: 15px;
@@ -181,7 +170,7 @@ input:focus {
 }
 
 .primary-btn:hover {
-    background-color: #6bb98f;
+    background-color: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -217,6 +206,8 @@ input:focus {
 .login-prompt a:hover {
     text-decoration: underline;
 }
+
+
 
 .password-group {   
     position: relative;
@@ -286,25 +277,6 @@ input:focus {
     margin-top: 20px;
 }
 
-/* ...existing code... */
-.password-group {   
-    position: relative;
-}
-.toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 16px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: #888;
-    font-size: 1.2em;
-    z-index: 2;
-}
-.toggle-password:hover {
-    color: #4285F4;
-}
-/* ...existing code... */
-
 .modal-btn:hover {
     background-color: #3367d6;
 }
@@ -325,15 +297,15 @@ input:focus {
     }
     .welcome-panel {
         border-radius: 0;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+        min-height: 180px;
+    }
+    .form-panel {
+        border-radius: 0;
         border-top-left-radius: 40px;
         border-bottom-left-radius: 40px;
         min-height: 180px;
-        order: 2;
-    }
-    .form-panel {
-  
-        min-height: 180px;
-        order: 1;
     }
 }
 
