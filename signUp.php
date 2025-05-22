@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(isset($_SESSION["LoggedIn"])) {
+    header("Location: landingPage.php");
+    exit;
+}
 if(isset($_SESSION["TooManyAttempts"])) {
     echo "<script>
         document.addEventListener('DOMContentLoaded', function() {

@@ -4,6 +4,13 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
     header("Location: login.php");
     exit;
 }
+
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,10 +43,12 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
         </a>
       </div>
       <div class="nav-right">
-        <button class="logout">
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <span class="nav-text">Logout</span>
-        </button>
+        <form method="post">
+          <button type="submit" name="logout" class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="nav-text">Logout</span>
+          </button>
+        </form>
       </div>
     </nav>
   </header>
@@ -135,7 +144,7 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
       <div class="footer-column">
         <p><strong>ABOUT US</strong></p>
         <p>JIHAD TEJAM</p>
-        <p>GABRIEL VINCULADO</p>
+        <p>ARON VINCULADO</p>
         <p>PATRICK SANTIAGO</p>
         <p>MARK SANTOS</p>
         <p>ASHLEY VASCO</p>

@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(isset($_SESSION["LoggedIn"])) {
+    header("Location: landingPage.php");
+    exit;
+}
 if(isset($_SESSION["RegistrationSuccess"])) {
     echo "<script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -36,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['LoggedIn'] = true;
                 header("Location: landingPage.php");
                 exit;
             } else {
