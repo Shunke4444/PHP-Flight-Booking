@@ -97,8 +97,8 @@
                 <div class="gallery-item tall" style="background-image: url('../PHP-Flight-Booking/assets/Devils_Tower_in_Wyoming.jpg')"></div>
                 <div class="gallery-item" style="background-image: url('assets/TOWER.jpg')"></div>
                 <div class="gallery-item" style="background-image: url('assets/tower2.jpg"></div>
-                <div class="gallery-item" style="background-image: url('assets/tower2.jpg')"></div>            
-                </div>
+                <div class="gallery-item wide" style="background-image: url('assets/tower3.jpg')"></div>
+            </div>
         </section>
 
         <section class="preparation-section">
