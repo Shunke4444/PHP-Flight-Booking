@@ -1,5 +1,27 @@
 <?php
+session_start();
+if (!isset($_SESSION["signup_email"]) || !isset($_SESSION["signup_code"])) {
+    header("Location: signUp.php");
+    exit;
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_POST["code"] != $_SESSION["signup_code"]) {
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showError('Incorrect Code');
+            });
+        </script>";
+
+        $_SESSION['attempts']++;
+
+        if ($_SESSION['attempts'] >= 5) {
+            $_SESSION['TooManyAttempts'] = true;
+            header("Location: signUp.php");
+            exit;
+        }
+        exit;
+    }
+    
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -10,31 +32,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->connect_error) {
         echo "<script>showError('Database connection failed');</script>";
     } else {
-        $user_name = $_POST["username"];
-        $email = $_POST["email"];
-        $pw = $_POST["password"];
-        $conf_pw = $_POST["confirm_password"];
-
-        if ($pw != $conf_pw) {
-            echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    showError('Passwords do not match!');
-                });
-            </script>";
-        } else {
-            $sql = "INSERT INTO user_info (username, email, password, conf_password)
-                    VALUES('$user_name', '$email', '$pw', '$conf_pw')";
-        
-            if ($conn->query($sql) === TRUE) {
-                echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        showSuccess();
-                    });
-                </script>";
-            } else {
-                echo "<script>showError('Registration failed');</script>";
-            }
-        }
+        $stmt = $conn->prepare("INSERT INTO user_info (username, email, password, conf_password)
+                        VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", 
+            $_SESSION['username'],
+            $_SESSION['email'],
+            $_SESSION['password'],
+            $_SESSION['confirm_password']
+        );
+        $stmt->execute();
+    
+        $_SESSION['RegistrationSuccess'] = true;
+        header("Location: login.php");
         $conn->close();
     }
 }
@@ -55,48 +64,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="welcome-content">
                 <h1>New Here?</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, dicta. put vector here</p>
-                <button class="outline-btn">SIGN UP</button>
+                <!-- <button class="outline-btn">SIGN UP</button> -->
             </span>
         </section>
 
         <section class="form-panel">
             <form id="registrationForm" method="post">
-                <h2>Sign Up</h2>
+                <h2>Forgot Password</h2>
                 
-                <article class="social-buttons">
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-google"></i>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-twitter"></i>
-                    </button>
-                </article>
-                
-                <p class="divider">Or use your email for registration</p>
+                <p class="divider">The code has sent to <?php echo $_SESSION['signup_email']; ?></p>
                 
                 <div class="form-group">
-                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <input type="text" id="code" name="code" placeholder="Code" required>
                 </div>
-                
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
-                </div>
-                
-                <button type="submit" class="primary-btn">Sign Up</button>
-                
+                <button type="submit" class="primary-btn">Submit</button>
                 <div class="login-prompt">
-                    <p>One of us? <a href="login.php">Login</a></p>
+                    <p>Return to Signup? <a href="signUp.php">Sign Up</a></p>
                 </div>
             </form>
         </section>

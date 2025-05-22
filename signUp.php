@@ -1,4 +1,25 @@
 <?php
+session_start();
+if(isset($_SESSION["TooManyAttempts"])) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showError('Too many attempts. You've been redirected back to the sign up page.');
+        });
+    </script>";
+    session_unset();
+}
+else if (isset($_SESSION["signup_email"]) || isset($_SESSION["signup_code"])) {
+    session_unset();
+}
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $servername = "localhost";
     $username = "root";
@@ -59,22 +80,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </script>";
         } 
         else {
-            $sql = "INSERT INTO user_info (username, email, password, conf_password)
-                    VALUES('$user_name', '$email', '$pw', '$conf_pw')";
-        
-            if ($conn->query($sql) === TRUE) {
-                echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        showSuccess();
-                    });
-                </script>";
-            } else {
-                echo "<script>showError('Registration failed');</script>";
+            $conn->close();
+            $usernameCheck->close();
+            $emailCheck->close();
+
+            $_SESSION['username'] = $user_name;
+            $_SESSION['email'] = $email;
+            $_SESSION['password'] = $pw;
+            $_SESSION['confirm_password'] = $conf_pw;
+
+            $code = rand(100000, 999999);
+            $_SESSION['signup_email'] = $email;
+            $_SESSION['signup_code'] = $code;
+            $_SESSION['attempts'] = 0;
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = $_ENV['MAIL_USERNAME'];
+                $mail->Password = $_ENV['MAIL_PASSWORD'];
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+
+                $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['MAIL_FROM_NAME']);
+                $mail->addAddress($email);
+                $mail->Subject = 'Email Confirmation Code';
+                $mail->Body    = "Your email confirmation code is: $code";
+
+                $mail->send();
+            } catch (Exception $e) {
+                echo "Email error: {$mail->ErrorInfo}";
             }
+            header("Location: signUpConfirmation.php");
+
+
+            // $sql = "INSERT INTO user_info (username, email, password, conf_password)
+            //         VALUES('$user_name', '$email', '$pw', '$conf_pw')";
+        
+            // if ($conn->query($sql) === TRUE) {
+            //     echo "<script>
+            //         document.addEventListener('DOMContentLoaded', function() {
+            //             showSuccess();
+            //         });
+            //     </script>";
+            // } else {
+            //     echo "<script>showError('Registration failed');</script>";
+            // }
         }
-        $conn->close();
-        $usernameCheck->close();
-        $emailCheck->close();
     }
 }
 ?>

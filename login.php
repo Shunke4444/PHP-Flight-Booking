@@ -1,5 +1,13 @@
 <?php
 session_start();
+if(isset($_SESSION["RegistrationSuccess"])) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showSuccess();
+        });
+    </script>";
+    session_unset();
+}
 $conn = new mysqli("localhost", "root", "", " accounts");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
