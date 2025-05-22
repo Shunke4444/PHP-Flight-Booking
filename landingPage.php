@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
-    header("Location: login.php");
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
+//     header("Location: login.php");
+//     exit;
+// }
 ?>
 
 <!DOCTYPE html>
@@ -83,16 +83,16 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
         <p>Explore the highest peaks, challenge and conquer them!</p>
         <footer class="card-footer">
           <span class="price">₱7000</span>
-          <a href="../PHP-Flight-Booking/destinations/myongming.php" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/myongming.php" class="book-btn">More Information</a>
         </footer>
       </div>
       <div class="travel-card">
         <img src="../PHP-Flight-Booking/assets/Hiking.jpeg" alt="Paris" />
-        <h2>Hiking</h2>
+        <h2>Hiking the rich Greenland</h2>
         <p>Explore the beauty of nature within Greenland!</p>
         <footer class="card-footer">
           <span class="price">₱6000</span>
-          <a href="../PHP-Flight-Booking/destinations/greenland.php" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/greenland.php" class="book-btn">More Information</a>
         </footer>
       </div>
       <div class="travel-card">
@@ -101,7 +101,7 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
         <p>Shred NZ’s scenery, mountains, and hidden trails suited for adrenaline-fueled riders.</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
-          <a href="../PHP-Flight-Booking/destinations/newzealand.php" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/newzealand.php" class="book-btn">More Information</a>
         </footer>
       </div>
       <div class="travel-card">
@@ -110,7 +110,7 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
         <p>An energetic party with your loved ones!</p>
         <footer class="card-footer">
           <span class="price">₱3500</span>
-          <a href="../PHP-Flight-Booking/destinations/southcalifornia.php" class="book-btn">More Information</a>
+          <a href="../PHP-Flight-Booking/southcalifornia.php" class="book-btn">More Information</a>
         </footer>
       </div>    
     </article>
@@ -120,7 +120,7 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
     <div class="footer-top">
       <div class="footer-column">
         <span class="foot-logo">
-          <img src="../PHP-Flight-Booking//assets/LOGO.png" alt="">
+          <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
         </span>
       </div>
       <div class="footer-column">

@@ -1,75 +1,75 @@
 <?php
-session_start();
-if(isset($_SESSION["RegistrationSuccess"])) {
-    echo "<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            showSuccess();
-        });
-    </script>";
-    session_unset();
-}
-$conn = new mysqli("localhost", "root", "", " accounts");
+// session_start();
+// if(isset($_SESSION["RegistrationSuccess"])) {
+//     echo "<script>
+//         document.addEventListener('DOMContentLoaded', function() {
+//             showSuccess();
+//         });
+//     </script>";
+//     session_unset();
+// }
+// $conn = new mysqli("localhost", "root", "", " accounts");
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $input = $_POST["username_or_email"];
-    $password = $_POST["password"];
+// if ($_SERVER["REQUEST_METHOD"] === "POST") {
+//     $input = $_POST["username_or_email"];
+//     $password = $_POST["password"];
 
-    $stmt = $conn->prepare("SELECT id, username, password, failed_attempts, locked_until FROM user_info WHERE username=? OR email=?");
-    $stmt->bind_param("ss", $input, $input);
-    $stmt->execute();
-    $result = $stmt->get_result();
+//     $stmt = $conn->prepare("SELECT id, username, password, failed_attempts, locked_until FROM user_info WHERE username=? OR email=?");
+//     $stmt->bind_param("ss", $input, $input);
+//     $stmt->execute();
+//     $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
+//     if ($result->num_rows === 1) {
+//         $user = $result->fetch_assoc();
 
-        if ($user['locked_until'] && strtotime($user['locked_until']) > time()) {
-            echo "<script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        showError('Account locked. Try again later.');
-                    });
-                </script>";
-        } else {
-            if ($password == $user['password']) {
-                $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=0, locked_until=NULL WHERE id=?");
-                $stmt->bind_param("i", $user['id']);
-                $stmt->execute();
+//         if ($user['locked_until'] && strtotime($user['locked_until']) > time()) {
+//             echo "<script>
+//                     document.addEventListener('DOMContentLoaded', function() {
+//                         showError('Account locked. Try again later.');
+//                     });
+//                 </script>";
+//         } else {
+//             if ($password == $user['password']) {
+//                 $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=0, locked_until=NULL WHERE id=?");
+//                 $stmt->bind_param("i", $user['id']);
+//                 $stmt->execute();
 
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                header("Location: landingPage.php");
-                exit;
-            } else {
-                $failed = $user['failed_attempts'] + 1;
-                $lockTime = NULL;
+//                 $_SESSION['user_id'] = $user['id'];
+//                 $_SESSION['username'] = $user['username'];
+//                 header("Location: landingPage.php");
+//                 exit;
+//             } else {
+//                 $failed = $user['failed_attempts'] + 1;
+//                 $lockTime = NULL;
 
-                if ($failed >= 5) {
-                    $lockTime = date("Y-m-d H:i:s", time() + 5 * 60);
-                    echo "<script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                showError('Too many attempts. Account locked for 5 minutes.');
-                            });
-                        </script>";
-                } else {
-                    echo "<script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                showError('Incorrect password');
-                            });
-                        </script>";
-                }
+//                 if ($failed >= 5) {
+//                     $lockTime = date("Y-m-d H:i:s", time() + 5 * 60);
+//                     echo "<script>
+//                             document.addEventListener('DOMContentLoaded', function() {
+//                                 showError('Too many attempts. Account locked for 5 minutes.');
+//                             });
+//                         </script>";
+//                 } else {
+//                     echo "<script>
+//                             document.addEventListener('DOMContentLoaded', function() {
+//                                 showError('Incorrect password');
+//                             });
+//                         </script>";
+//                 }
 
-                $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=?, locked_until=? WHERE id=?");
-                $stmt->bind_param("isi", $failed, $lockTime, $user['id']);
-                $stmt->execute();
-            }
-        }
-    } else {
-        echo "<script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    showError('Account not found');
-                });
-            </script>";
-    }
-}
+//                 $stmt = $conn->prepare("UPDATE user_info SET failed_attempts=?, locked_until=? WHERE id=?");
+//                 $stmt->bind_param("isi", $failed, $lockTime, $user['id']);
+//                 $stmt->execute();
+//             }
+//         }
+//     } else {
+//         echo "<script>
+//                 document.addEventListener('DOMContentLoaded', function() {
+//                     showError('Account not found');
+//                 });
+//             </script>";
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -78,36 +78,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link rel="stylesheet" href="styles/login.css">
+    <link rel="icon" type='image/png' href="assets/ICON.png">
+    <link rel="stylesheet" href="styles/LogIn.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5756001ff6.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
     <main class="fullscreen-container">
         <section class="form-panel">
             <form id="loginForm" method="post"> 
-                <h2>Login</h2>
-                <article class="social-buttons">
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-google"></i>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-facebook-f"></i>
-                    </button>
-                    <button type="button" class="social-btn">
-                        <i class="fab fa-twitter"></i>
-                    </button>
-                </article>
-                
+                <h2>Login</h2>        
                 <p class="divider">Or use your email to log in</p>
                 
                 <div class="form-group">
                     <input type="text" id="username_or_email" name="username_or_email" placeholder="Username/Email" required>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group password-group">
                     <input type="password" id="password" name="password" placeholder="Password" required>
-                    <input type="checkbox" id="showPassword"> Show Password
+                    <span class="toggle-password" toggle="#password">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
                 <button type="submit" class="primary-btn">Login</button>
                 <div class="login-prompt">
@@ -144,6 +139,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </article>
     <script src="script.js"></script>
-
 </body>
 </html>

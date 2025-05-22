@@ -13,7 +13,6 @@ function showSuccess() {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registrationForm');
     const closeButtons = document.querySelectorAll('.close');
@@ -21,9 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (form) {
         form.addEventListener('submit', function(e) {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm_password').value;
-            
+            const password = document.getElementById('passwordSignUp')?.value;
+            const confirmPassword = document.getElementById('confirm_passwordSignUp')?.value;
             if (password !== confirmPassword) {
                 e.preventDefault();
                 showError('Passwords do not match!');
@@ -51,29 +49,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Sign Up
-    const passwordInputSignUp = document.getElementById("passwordSignUp");
-    const passwordInputConfirmation = document.getElementById("confirm_passwordSignUp");
-    const showPasswordCheckboxSignUp = document.getElementById("showPasswordSignUp");
-
-    showPasswordCheckboxSignUp.addEventListener("change", function () {
-        if(this.checked){
-            passwordInputSignUp.type = "text";
-            passwordInputConfirmation.type = "text";
-        } else{
-            passwordInputSignUp.type = "password";
-            passwordInputConfirmation.type = "password";
-        }
-    });
-
-    // Login 
-    const passwordInput = document.getElementById("password");
-    const showPasswordCheckbox = document.getElementById("showPassword");
-
-    showPasswordCheckbox.addEventListener("change", function () {
-        passwordInput.type = this.checked ? "text" : "password";
+    // Modern show/hide password toggle for both password fields
+    document.querySelectorAll('.toggle-password').forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+            const input = document.querySelector(this.getAttribute('toggle'));
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.querySelector('i').classList.remove('fa-eye');
+                this.querySelector('i').classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                this.querySelector('i').classList.remove('fa-eye-slash');
+                this.querySelector('i').classList.add('fa-eye');
+            }
+        });
     });
 });
-   
+
 window.showError = showError;
 window.showSuccess = showSuccess;
