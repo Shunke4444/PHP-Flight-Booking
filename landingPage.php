@@ -20,7 +20,7 @@ if (isset($_POST['logout'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type='image/png' href="assets/ICON.png">
   <title>Compass</title>
-  <link rel="stylesheet" href="styles/landingPage.css" />
+  <link rel="stylesheet" href="styles/landing.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@ if (isset($_POST['logout'])) {
       </div>  
       <div class="logo">
         <a href="../PHP-Flight-Booking/landingPage.php">
-          <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
+          <img src="../PHP-Flight-Booking/assets/WALOGO.png" alt="">
         </a>
       </div>
       <div class="nav-right">
@@ -132,12 +132,14 @@ if (isset($_POST['logout'])) {
     <div class="footer-top">
       <div class="footer-column">
         <span class="foot-logo">
-          <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
+          <img src="../PHP-Flight-Booking/assets/WALOGO.png" alt="">
         </span>
       </div>
       <div class="footer-column">
-        <p><strong>SERVICES</strong></p>
+        <p><strong>CONTACT US</strong></p>
         <p>Final Requirment, Compass Website</p>
+        <p><strong>Contact Number: </strong> 0919191909</p>
+        <p><strong>Email: </strong>   compass@gmail.com</p>
       </div>
       <div class="footer-column">
         <p><strong>GROUP 9</strong></p>

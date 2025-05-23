@@ -97,13 +97,13 @@ body, html {
 .logout {
   padding: 12px 18px;
   border: none;
-  background: #91d4b2;
-  color: rgb(0, 0, 0);
+  background: #3367d6;
+  color: rgb(255, 255, 255);
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
-}
+} 
 
 .hero-text {
   z-index: 2;
@@ -311,23 +311,23 @@ body, html {
 
 .book-btn {
   padding: 10px 15px;
-  background-color: #91d4b2;
+  background-color: #3367d6;
   border: none;
   border-radius: 6px;
-  color: #000000;
+  color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s;
   text-decoration: none;
 }
 
 .book-btn:hover {
-  background-color: #70ba95;
+  background-color: #1a346b;
 }
 
 .footer {
   padding: 40px 20px;
-  background-color: #91d4b2;
-  color: #000000;
+  background-color: #3367d6;
+  color: #ffffff;
 }
 
 .footer-top {
@@ -368,12 +368,12 @@ body, html {
 .footer-column p {
   margin: 5px 0;
   font-size: 14px;
-  color: #000000;
+  color: #ffffff;
 }
 
 hr {
   border: none;
-  border-top: 1px solid #444;
+  border-top: 1px solid #f8f8f8;
   margin: 20px 0;
 }
 
@@ -386,7 +386,7 @@ hr {
 }
 
 .social-icons a {
-  color: #000000;
+  color: #ffffff;
   margin: 0 8px;
   font-size: 18px;
   text-decoration: none;
@@ -394,7 +394,7 @@ hr {
 
 .footer-bottom p {
   font-size: 13px;
-  color: #000000;
+  color: #ffffff;
 }
 
 /* Modal Styles */
@@ -482,7 +482,7 @@ hr {
 }
 
 .submit-btn {
-  background-color: #91d4b2;
+  background-color: #3367d6;
   color: #000;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -570,7 +570,7 @@ hr {
 }
 
 .confirm-btn {
-  background-color: #91d4b2;
+  background-color: #3367d6;
   color: #000;
 }
 

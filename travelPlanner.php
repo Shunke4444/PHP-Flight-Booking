@@ -28,14 +28,14 @@ if (isset($_POST['logout'])) {
 </head>
 <body>
 
- <header class="nav-header">
+  <header class="nav-header">
     <nav class="navbar">
       <div class="nav-left">
         <span class="icon">
           <a href="travelLog.php" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
         </span>
         <span class="icon">
-          <a href="#" class="nav-link travel-planner-btn"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
+          <a href="travelPlanner.php" class="nav-link travel-planner-btn"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
         </span>
         <span class="icon">
           <a href="destination.php" class="nav-link"><i class="fa-solid fa-globe"></i><span class="nav-text">Destination</span></a>
@@ -43,7 +43,7 @@ if (isset($_POST['logout'])) {
       </div>  
       <div class="logo">
         <a href="../PHP-Flight-Booking/landingPage.php">
-          <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
+          <img src="../PHP-Flight-Booking/assets/WALOGO.png" alt="">
         </a>
       </div>
       <div class="nav-right">
