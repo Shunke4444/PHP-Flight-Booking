@@ -1,5 +1,4 @@
 
-/* Modern Travel Planner Styles */
 
 :root {
   --primary-blue: #2563eb;
@@ -125,13 +124,12 @@ body {
 .map-container {
   position: relative;
   width: 100%;
-  max-width: 900px;/* Increased from 1100px */
+  max-width: 900px;
   aspect-ratio: 16/9;
   background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-lg);
-  /* overflow: hidden; */
-  padding: 3.5rem;        /* Increased padding */
+  padding: 3.5rem;        
   display: flex;
   align-items: center;
   justify-content: center;
@@ -571,11 +569,11 @@ body {
     border-right: none;
   }
 
-  /* Map Section */
+
   .map-container {
     margin-top: 5rem;
     padding: 1.5rem;
-    aspect-ratio: 1/1; /* More square aspect ratio */
+    aspect-ratio: 1/1; 
     border-radius: var(--border-radius-sm);
   }
 
@@ -617,17 +615,15 @@ body {
     font-size: 0.9rem;
   }
 
-  /* Buttons */
   .submit-btn, 
   .edit-btn, 
   .confirm-btn,
   .map-btn {
     padding: 0.9rem 1.8rem;
     font-size: 1rem;
-    width: 100%; /* Full width buttons */
+    width: 100%; 
   }
 
-  /* Modal */
   .modal-content {
     padding: 1.8rem;
     border-radius: var(--border-radius-sm);
@@ -643,7 +639,6 @@ body {
     padding: 0.9rem;
   }
 
-  /* Special Cases */
   .divider {
     margin: 1.5rem 0;
   }
