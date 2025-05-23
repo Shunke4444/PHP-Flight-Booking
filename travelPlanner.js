@@ -10,15 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Initialize panzoom on SVG for pinch and scroll support
   const panzoom = Panzoom(svg, {
     maxScale: 5,
     minScale: 1,
     contain: 'none',
   });
-  // Enable wheel zoom on desktop
+
   svg.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
-  // Make svg focusable for accessibility (optional)
   svg.setAttribute('tabindex', 0);
 
   const countries = svg.querySelectorAll('path');
@@ -69,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const groupSizeSelect = document.getElementById('group-size');
   const membersInput = document.getElementById('members');
 
-  // Prevent past dates
   const today = new Date().toISOString().split('T')[0];
   if (dateInput) {
     dateInput.setAttribute('min', today);

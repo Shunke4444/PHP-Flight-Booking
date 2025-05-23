@@ -34,7 +34,6 @@ footer {
   padding: 1rem;
 }
 
-/* Simple Image Carousel */
 .carousel {
   display: flex;
   overflow-x: auto;

@@ -1,5 +1,4 @@
 
-/* Modern Travel Planner Styles */
 
 :root {
   --primary-blue: #2563eb;
@@ -40,7 +39,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 16px;         /* Reduced from 24px for more space */
+  padding: 15px 16px;       
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -54,7 +53,7 @@ body {
   min-height: 70px;
   margin-bottom: 10rem;
   border-bottom: 1px solid rgba(229, 231, 235, 0.5);
-  box-sizing: border-box;     /* Ensures padding doesn't overflow */
+  box-sizing: border-box;   
 }
 
 .nav-text {
@@ -175,13 +174,12 @@ body {
 .map-container {
   position: relative;
   width: 100%;
-  max-width: 900px;/* Increased from 1100px */
+  max-width: 900px;
   aspect-ratio: 16/9;
   background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-lg);
-  /* overflow: hidden; */
-  padding: 3.5rem;        /* Increased padding */
+  padding: 3.5rem;        
   display: flex;
   align-items: center;
   justify-content: center;
@@ -578,13 +576,13 @@ body {
 @media (max-width: 600px) {
   body {
     padding-top: 60px;
-    padding-left: 8px;    /* Add left padding */
-    padding-right: 8px;   /* Add right padding */
-    overflow-x: hidden;   /* Prevent horizontal scroll */
-    /* Reduced for smaller navbar */
+    padding-left: 8px;    
+    padding-right: 8px;   
+    overflow-x: hidden;   
+  
   }
 
-  /* Navbar */
+  
   .navbar {
     padding: 12px 16px;
     min-height: 60px;
@@ -596,11 +594,11 @@ body {
   }
 
   .nav-text {
-    display: none; /* Hide text labels on small screens */
+    display: none; 
   }
 
   .logo img {
-    width: 9rem; /* Smaller logo */
+    width: 9rem; 
   }
 
   .logout {
@@ -608,7 +606,7 @@ body {
     font-size: 0.9rem;
   }
 
-  /* Main Content */
+
   .main-wrapper {
     margin-top: 8rem;
     padding: 2rem 1.5rem;
@@ -618,11 +616,11 @@ body {
     border-right: none;
   }
 
-  /* Map Section */
+
   .map-container {
     margin-top: 15rem;
     padding: 1.5rem;
-    aspect-ratio: 1/1; /* More square aspect ratio */
+    aspect-ratio: 1/1; 
     border-radius: var(--border-radius-sm);
   }
 
@@ -635,7 +633,7 @@ body {
     max-width: 100%;
   }
 
-  /* Booking Section */
+
   .booking-section {
     padding: 2rem 1.5rem;
     border-radius: var(--border-radius-sm);
@@ -659,17 +657,15 @@ body {
     font-size: 0.9rem;
   }
 
-  /* Buttons */
   .submit-btn, 
   .edit-btn, 
   .confirm-btn,
   .map-btn {
     padding: 0.9rem 1.8rem;
     font-size: 1rem;
-    width: 100%; /* Full width buttons */
+    width: 100%; 
   }
 
-  /* Modal */
   .modal-content {
     padding: 1.8rem;
     border-radius: var(--border-radius-sm);
@@ -685,12 +681,10 @@ body {
     padding: 0.9rem;
   }
 
-  /* Special Cases */
   .divider {
     margin: 1.5rem 0;
   }
 
-  /* Icon-only navigation */
   .icon {
     justify-content: center;
     width: 36px;
@@ -705,7 +699,6 @@ body {
     font-size: 1.1rem;
   }
 
-  /* Tooltip adjustments */
   .country-tooltip {
     font-size: 0.85rem;
     padding: 6px 12px;
@@ -715,7 +708,6 @@ body {
   }
 }
 
-/* Additional tweaks for very small devices */
 @media (max-width: 400px) {
   .navbar {
     padding: 10px 12px;

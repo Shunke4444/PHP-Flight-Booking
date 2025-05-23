@@ -1,139 +1,139 @@
 <?php
-// session_start();
-// if(isset($_SESSION["LoggedIn"])) {
-//     header("Location: landingPage.php");
-//     exit;
-// }
-// if(isset($_SESSION["TooManyAttempts"])) {
-//     echo "<script>
-//         document.addEventListener('DOMContentLoaded', function() {
-//             showError('Too many attempts. You've been redirected back to the sign up page.');
-//         });
-//     </script>";
-//     session_unset();
-// }
-// else if (isset($_SESSION["signup_email"]) || isset($_SESSION["signup_code"])) {
-//     session_unset();
-// }
+session_start();
+if(isset($_SESSION["LoggedIn"])) {
+    header("Location: landingPage.php");
+    exit;
+}
+if(isset($_SESSION["TooManyAttempts"])) {
+    echo "<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showError('Too many attempts. You've been redirected back to the sign up page.');
+        });
+    </script>";
+    session_unset();
+}
+else if (isset($_SESSION["signup_email"]) || isset($_SESSION["signup_code"])) {
+    session_unset();
+}
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
-// require_once 'vendor/autoload.php';
-// require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
-// $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-// $dotenv->load();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $servername = "localhost";
-//     $username = "root";
-//     $password = "";
-//     $dbname = " accounts";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = " accounts";
 
-//     $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-//     if ($conn->connect_error) {
-//         echo "<script>showError('Database connection failed');</script>";
-//     } else {
-//         $user_name = $_POST["username"];
-//         $email = $_POST["email"];
-//         $pw = $_POST["password"];
-//         $conf_pw = $_POST["confirm_password"];
+    if ($conn->connect_error) {
+        echo "<script>showError('Database connection failed');</script>";
+    } else {
+        $user_name = $_POST["username"];
+        $email = $_POST["email"];
+        $pw = $_POST["password"];
+        $conf_pw = $_POST["confirm_password"];
 
-//         $uppercase = preg_match('/[A-Z]/', $pw);
-//         $lowercase = preg_match('/[a-z]/', $pw);
-//         $number    = preg_match('/[0-9]/', $pw);
-//         $special   = preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?~`]/', $pw);
+        $uppercase = preg_match('/[A-Z]/', $pw);
+        $lowercase = preg_match('/[a-z]/', $pw);
+        $number    = preg_match('/[0-9]/', $pw);
+        $special   = preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?~`]/', $pw);
 
-//         $usernameCheck = $conn->prepare("SELECT id FROM user_info WHERE username = ?");
-//         $usernameCheck->bind_param("s", $user_name);
-//         $usernameCheck->execute();
-//         $usernameCheck->store_result();
+        $usernameCheck = $conn->prepare("SELECT id FROM user_info WHERE username = ?");
+        $usernameCheck->bind_param("s", $user_name);
+        $usernameCheck->execute();
+        $usernameCheck->store_result();
 
-//         $emailCheck = $conn->prepare("SELECT id FROM user_info WHERE email = ?");
-//         $emailCheck->bind_param("s", $email);
-//         $emailCheck->execute();
-//         $emailCheck->store_result();
+        $emailCheck = $conn->prepare("SELECT id FROM user_info WHERE email = ?");
+        $emailCheck->bind_param("s", $email);
+        $emailCheck->execute();
+        $emailCheck->store_result();
 
-//         if($usernameCheck->num_rows > 0) {
-//             echo "<script>
-//                 document.addEventListener('DOMContentLoaded', function() {
-//                     showError('Username already exists!');
-//                 });
-//             </script>";
-//         }
-//         else if($emailCheck->num_rows > 0) {
-//             echo "<script>
-//                 document.addEventListener('DOMContentLoaded', function() {
-//                     showError('Email already exists!');
-//                 });
-//             </script>";
-//         }
-//         else if ($pw != $conf_pw) {
-//             echo "<script>
-//                 document.addEventListener('DOMContentLoaded', function() {
-//                     showError('Passwords do not match!');
-//                 });
-//             </script>";
-//         }
-//         else if(!$uppercase || !$lowercase || !$number || !$special || strlen($pw) < 8){
-//             echo "<script>
-//                 document.addEventListener('DOMContentLoaded', function() {
-//                     showError('Password must be at least 8 characters long and contain uppercase, lowercase, number, and special character.');
-//                 });
-//             </script>";
-//         } 
-//         else {
-//             $conn->close();
-//             $usernameCheck->close();
-//             $emailCheck->close();
+        if($usernameCheck->num_rows > 0) {
+            echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    showError('Username already exists!');
+                });
+            </script>";
+        }
+        else if($emailCheck->num_rows > 0) {
+            echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    showError('Email already exists!');
+                });
+            </script>";
+        }
+        else if ($pw != $conf_pw) {
+            echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    showError('Passwords do not match!');
+                });
+            </script>";
+        }
+        else if(!$uppercase || !$lowercase || !$number || !$special || strlen($pw) < 8){
+            echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    showError('Password must be at least 8 characters long and contain uppercase, lowercase, number, and special character.');
+                });
+            </script>";
+        } 
+        else {
+            $conn->close();
+            $usernameCheck->close();
+            $emailCheck->close();
 
-//             $_SESSION['username'] = $user_name;
-//             $_SESSION['email'] = $email;
-//             $_SESSION['password'] = $pw;
-//             $_SESSION['confirm_password'] = $conf_pw;
+            $_SESSION['username'] = $user_name;
+            $_SESSION['email'] = $email;
+            $_SESSION['password'] = $pw;
+            $_SESSION['confirm_password'] = $conf_pw;
 
-//             $code = rand(100000, 999999);
-//             $_SESSION['signup_email'] = $email;
-//             $_SESSION['signup_code'] = $code;
-//             $_SESSION['attempts'] = 0;
-//             $mail = new PHPMailer(true);
-//             try {
-//                 $mail->isSMTP();
-//                 $mail->Host = 'smtp.gmail.com';
-//                 $mail->SMTPAuth = true;
-//                 $mail->Username = $_ENV['MAIL_USERNAME'];
-//                 $mail->Password = $_ENV['MAIL_PASSWORD'];
-//                 $mail->SMTPSecure = 'tls';
-//                 $mail->Port = 587;
+            $code = rand(100000, 999999);
+            $_SESSION['signup_email'] = $email;
+            $_SESSION['signup_code'] = $code;
+            $_SESSION['attempts'] = 0;
+            $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = $_ENV['MAIL_USERNAME'];
+                $mail->Password = $_ENV['MAIL_PASSWORD'];
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
 
-//                 $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['MAIL_FROM_NAME']);
-//                 $mail->addAddress($email);
-//                 $mail->Subject = 'Email Confirmation Code';
-//                 $mail->Body    = "Your email confirmation code is: $code";
+                $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['MAIL_FROM_NAME']);
+                $mail->addAddress($email);
+                $mail->Subject = 'Email Confirmation Code';
+                $mail->Body    = "Your email confirmation code is: $code";
 
-//                 $mail->send();
-//             } catch (Exception $e) {
-//                 echo "Email error: {$mail->ErrorInfo}";
-//             }
-//             header("Location: signUpConfirmation.php");
+                $mail->send();
+            } catch (Exception $e) {
+                echo "Email error: {$mail->ErrorInfo}";
+            }
+            header("Location: signUpConfirmation.php");
 
 
-//             $sql = "INSERT INTO user_info (username, email, password, conf_password)
-//                     VALUES('$user_name', '$email', '$pw', '$conf_pw')";
+            $sql = "INSERT INTO user_info (username, email, password, conf_password)
+                    VALUES('$user_name', '$email', '$pw', '$conf_pw')";
         
-//             if ($conn->query($sql) === TRUE) {
-//                 echo "<script>
-//                     document.addEventListener('DOMContentLoaded', function() {
-//                         showSuccess();
-//                     });
-//                 </script>";
-//             } else {
-//                 echo "<script>showError('Registration failed');</script>";
-//             }
-//         }
-//     }
-// }
+            if ($conn->query($sql) === TRUE) {
+                echo "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        showSuccess();
+                    });
+                </script>";
+            } else {
+                echo "<script>showError('Registration failed');</script>";
+            }
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
