@@ -84,7 +84,7 @@
         <p>We are here to make your travel experience unforgettable.</p>
       </span>
       <span class="travel-btn-container">
-        <a href="travelPlanner.php" class="travel-btn">Book now!</a>
+        <a href="destination.php" class="travel-btn">Explore more places!</a>
       </span>
     </article>
 
