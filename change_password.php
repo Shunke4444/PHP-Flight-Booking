@@ -9,12 +9,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pw = $_POST["password"];
     $conf_pw = $_POST["confirm_password"];
 
+    $uppercase = preg_match('/[A-Z]/', $pw);
+    $lowercase = preg_match('/[a-z]/', $pw);
+    $number    = preg_match('/[0-9]/', $pw);
+    $special   = preg_match('/[!@#$%^&*()_+\-=\[\]{};:"\\|,.<>\/?~`]/', $pw);
+
     if ($pw != $conf_pw) {
         echo "<script>
                 document.addEventListener('DOMContentLoaded', function() {
                     showError('Passwords do not match!');
                 });
             </script>";
+    } else if(!$uppercase || !$lowercase || !$number || !$special || strlen($pw) < 8){
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                showError('Password must be at least 8 characters long and contain uppercase, lowercase, number, and special character.');
+            });
+        </script>";
     } else {
         $servername = "localhost";
         $username = "root";
@@ -33,9 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             
             if ($stmt->execute()) {
-                session_destroy();
                 $stmt->close();
                 $conn->close();
+                session_unset();
+                session_destroy();
                 header("Location: login.php");
                 exit;
             } else {
@@ -59,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -72,12 +84,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 <p class="divider">Or use your email to log in</p>
                 
-                <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+                <div class="form-group password-group">
+                    <input type="password" id="passwordSignUp" name="password" placeholder="Password" required>
+                    <span class="toggle-password" toggle="#passwordSignUp">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
-                
-                <div class="form-group">
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                <div class="form-group password-group">
+                    <input type="password" id="confirm_passwordSignUp" name="confirm_password" placeholder="Confirm Password" required>
+                    <span class="toggle-password" toggle="#confirm_passwordSignUp">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
                 <button type="submit" class="primary-btn">Reset</button>
             </form>

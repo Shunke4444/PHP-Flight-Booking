@@ -46,8 +46,8 @@ if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
 
     <main>
         <section class="input-section">
-            <h2>Add a New Trip</h2>
-            <form id="travel-form">
+            <h2>Welcome <?php echo $_SESSION["username"];?>. How was your trip?</h2>
+            <form id="travel-form" method="post">
                 <label for="destination">Destination:</label>
                 <input type="text" id="destination" placeholder="Where did you go?" required>
                 
