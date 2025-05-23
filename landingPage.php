@@ -71,7 +71,7 @@ if (isset($_POST['logout'])) {
         <p>Discover new places with our smart travel planner.</p>
       </span>
       <span class="btn-container">
-        <a href="#" class="explore-btn">Book now!</a>
+        <a href="travelPlanner.php" class="explore-btn">Book now!</a>
       </span>
     </article>
     <aside class="world-banner"></aside>
@@ -84,7 +84,7 @@ if (isset($_POST['logout'])) {
         <p>We are here to make your travel experience unforgettable.</p>
       </span>
       <span class="travel-btn-container">
-        <a href="#" class="travel-btn">Book now</a>
+        <a href="destination.php" class="travel-btn">Explore more places!</a>
       </span>
     </article>
 

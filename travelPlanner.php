@@ -72,102 +72,114 @@ if (isset($_POST['logout'])) {
     </div>
 
     <!-- Booking Section -->
-    <section class="booking-form">
-      <h1>DESTINATION</h1>
-      <form id="bookingForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label>City or closest major city</label>
-            <input type="text" id="city" name="city" required />
-          </div>
-          <div class="form-group">
-            <label>Country or Region</label>
-            <input type="text" id="country" name="country" required />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Travel Date</label>
-            <input type="date" id="travel-date" name="travel-date" required />
-          </div>
-          <div class="form-group">
-            <label for="group-size">Group Size:</label>
-            <select name="group-size" id="group-size" required>
-              <option value="">Select Group Size</option>
-              <option value="Solo">Solo</option>
-              <option value="Couple">Couple</option>
-              <option value="Group">Group</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Number of Members</label>
-            <input type="number" id="members" name="members" min="1" max="20" value="1" required />
-          </div>
-          <div class="form-group">
-            <label>Budget (₱)</label>
-            <input type="number" id="budget" name="budget" min="0" placeholder="Estimated budget" />
-          </div>
-        </div>
-        <h2>ACTIVITY</h2>
-        <div class="checkbox-group">
-          <div class="checkbox-option">
-            <input type="checkbox" id="hiking" name="activity" value="hiking" />
-            <label for="hiking">Hiking</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="mountain-biking" name="activity" value="mountain-biking" />
-            <label for="mountain-biking">Mountain Biking</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="kayaking" name="activity" value="kayaking" />
-            <label for="kayaking">Kayaking</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="skiing" name="activity" value="skiing" />
-            <label for="skiing">Skiing</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="fishing" name="activity" value="fishing" />
-            <label for="fishing">Fishing</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="surfing" name="activity" value="surfing" />
-            <label for="surfing">Surfing</label>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <h1>INFORMATION</h1>
-        <div class="checkbox-group">
-          <div class="checkbox-option">
-            <input type="checkbox" id="transportation" name="info" value="transportation" />
-            <label for="transportation">Transportation</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="health" name="info" value="health" />
-            <label for="health">Health</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="weather" name="info" value="weather" />
-            <label for="weather">Weather</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="gear" name="info" value="gear" />
-            <label for="gear">Gear</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="political-info" name="info" value="political-info" />
-            <label for="political-info">Political Info</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="activity-specific" name="info" value="activity-specific" />
-            <label for="activity-specific">Activity Specific</label>
-          </div>
-        </div>
-        <button type="submit" class="submit-btn">SUBMIT</button>
-      </form>
-    </section>
+ <section class="booking-form">
+  <h1>DESTINATION</h1>
+  <form id="bookingForm">
+    <!-- New: Personal Info -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="full-name">Full Name</label>
+        <input type="text" id="full-name" name="full-name" required />
+      </div>
+      <div class="form-group">
+        <label for="contact-number">Contact Number</label>
+        <input type="tel" id="contact-number" name="contact-number" pattern="[0-9+ ]{7,15}" placeholder="e.g. +639123456789" required />
+      </div>
+    </div>
+    <!-- Existing fields below -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>City or closest major city</label>
+        <input type="text" id="city" name="city" required />
+      </div>
+      <div class="form-group">
+        <label>Country or Region</label>
+        <input type="text" id="country" name="country" required />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Travel Date</label>
+        <input type="date" id="travel-date" name="travel-date" required />
+      </div>
+      <div class="form-group">
+        <label for="group-size">Group Size:</label>
+        <select name="group-size" id="group-size" required>
+          <option value="">Select Group Size</option>
+          <option value="Solo">Solo</option>
+          <option value="Couple">Couple</option>
+          <option value="Group">Group</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Number of Members</label>
+        <input type="number" id="members" name="members" min="1" max="20" value="1" required />
+      </div>
+      <div class="form-group">
+        <label>Budget (₱)</label>
+        <input type="number" id="budget" name="budget" min="0" placeholder="Estimated budget" />
+      </div>
+    </div>
+    <h2>ACTIVITY</h2>
+    <div class="checkbox-group">
+      <div class="checkbox-option">
+        <input type="checkbox" id="hiking" name="activity" value="hiking" />
+        <label for="hiking">Hiking</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="mountain-biking" name="activity" value="mountain-biking" />
+        <label for="mountain-biking">Mountain Biking</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="kayaking" name="activity" value="kayaking" />
+        <label for="kayaking">Kayaking</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="skiing" name="activity" value="skiing" />
+        <label for="skiing">Skiing</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="fishing" name="activity" value="fishing" />
+        <label for="fishing">Fishing</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="surfing" name="activity" value="surfing" />
+        <label for="surfing">Surfing</label>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <h1>INFORMATION</h1>
+    <div class="checkbox-group">
+      <div class="checkbox-option">
+        <input type="checkbox" id="transportation" name="info" value="transportation" />
+        <label for="transportation">Transportation</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="health" name="info" value="health" />
+        <label for="health">Health</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="weather" name="info" value="weather" />
+        <label for="weather">Weather</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="gear" name="info" value="gear" />
+        <label for="gear">Gear</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="political-info" name="info" value="political-info" />
+        <label for="political-info">Political Info</label>
+      </div>
+      <div class="checkbox-option">
+        <input type="checkbox" id="activity-specific" name="info" value="activity-specific" />
+        <label for="activity-specific">Activity Specific</label>
+      </div>
+    </div>
+    <button type="submit" class="submit-btn">SUBMIT</button>
+  </form>
+</section>
 
     <!-- Modal popup for confirmation -->
     <div id="confirmationModal" class="modal" style="display:none;">

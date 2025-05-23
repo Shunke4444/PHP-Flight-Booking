@@ -4,34 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climbing Myongming's Devil Tower</title>
-    <link rel="stylesheet" href="styles/myongming.css">
+    <link rel="stylesheet" href="styles/myong.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="nav-header">
-     <nav class="navbar">
-       <div class="nav-left">
-         <span class="icon">
-           <a href="travelLog.php" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
-         </span>
-         <span class="icon">
-           <a href="#" class="nav-link travel-planner-btn"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
-         </span>
-       </div>  
-       <div class="logo">
-         <a href="../PHP-Flight-Booking/landingPage.php">
-           <img src="../PHP-Flight-Booking/assets/LOGO.png" alt="">
-         </a>
-       </div>
-       <div class="nav-right">
-         <button class="logout">
-           <i class="fa-solid fa-right-from-bracket"></i>
-           <span class="nav-text">Logout</span>
-         </button>
-       </div>
-     </nav>
-   </header>
+    <nav class="navbar">
+      <div class="nav-left">
+        <span class="icon">
+          <a href="travelLog.php" class="nav-link"><i class="fa-solid fa-bookmark"></i><span class="nav-text">Travel Logs</span></a>
+        </span>
+        <span class="icon">
+          <a href="travelPlanner.php" class="nav-link travel-planner-btn"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
+        </span>
+        <span class="icon">
+          <a href="destination.php" class="nav-link"><i class="fa-solid fa-globe"></i><span class="nav-text">Destination</span></a>
+        </span>
+      </div>  
+      <div class="logo">
+        <a href="../PHP-Flight-Booking/landingPage.php">
+          <img src="../PHP-Flight-Booking/assets/WALOGO.png" alt="">
+        </a>
+      </div>
+      <div class="nav-right">
+        <form method="post">
+          <button type="submit" name="logout" class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="nav-text">Logout</span>
+          </button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
     <header class="hero">
         <div class="hero-content">
             <h1>Myongming's Devil Tower</h1>
@@ -131,35 +137,8 @@
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>About Devil Tower</h3>
-                    <p>First climbed in 1987 by legendary alpinist Chen Wei. Now maintained by the Myongming Climbing Association.</p>
-                </div>
-                <div class="footer-links">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">Route Guide</a></li>
-                        <li><a href="#">Weather Forecast</a></li>
-                        <li><a href="#">Permit Information</a></li>
-                        <li><a href="#">Local Guides</a></li>
-                    </ul>
-                </div>
-                <div class="footer-social">
-                    <h3>Connect</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Myongming Climbing Association. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div class="book-now-container" style="display: flex; justify-content: center; align-items: center; padding: 3rem 0;">
+        <a href="travelPlanner.php" class="book-now-btn">Book Now</a>
+    </div>
 </body>
 </html>

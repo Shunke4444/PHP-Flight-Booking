@@ -21,38 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const countries = svg.querySelectorAll('path');
 
-countries.forEach(path => {
-  const originalFill = path.style.fill;
+  countries.forEach(path => {
+    const originalFill = path.style.fill;
 
-function getCountryName(path) {
-  // Use the title attribute if present (your SVG uses this)
-  if (path.hasAttribute('title') && path.getAttribute('title').trim()) {
-    return path.getAttribute('title').trim();
-  }
-  // Fallback to id
-  return path.id || 'Unknown';
-}
-
-  path.addEventListener('mouseenter', () => {
-    const countryName = getCountryName(path);
-    path.style.fill = 'yellow';
-    hoveredInput.value = countryName;
-  });
-
-  path.addEventListener('mouseleave', () => {
-    path.style.fill = originalFill || '';
-    hoveredInput.value = '';
-  });
-
-  path.addEventListener('click', () => {
-    const countryName = getCountryName(path);
-    if (countryName) {
-      selectedInput.value = countryName;
-      countryInput.value = countryName;
-      countryInput.focus();
+    function getCountryName(path) {
+      // Use the title attribute if present
+      if (path.hasAttribute('title') && path.getAttribute('title').trim()) {
+        return path.getAttribute('title').trim();
+      }
+      // Fallback to id
+      return path.id || 'Unknown';
     }
+
+    path.addEventListener('mouseenter', () => {
+      const countryName = getCountryName(path);
+      path.style.fill = 'yellow';
+      hoveredInput.value = countryName;
+    });
+
+    path.addEventListener('mouseleave', () => {
+      path.style.fill = originalFill || '';
+      hoveredInput.value = '';
+    });
+
+    path.addEventListener('click', () => {
+      const countryName = getCountryName(path);
+      if (countryName) {
+        selectedInput.value = countryName;
+        countryInput.value = countryName;
+        countryInput.focus();
+      }
+    });
   });
-});
 
   useCountryBtn?.addEventListener('click', () => {
     if (hoveredInput.value) {
@@ -72,10 +72,18 @@ function getCountryName(path) {
   const dateInput = document.getElementById('travel-date');
   const groupSizeSelect = document.getElementById('group-size');
   const membersInput = document.getElementById('members');
+  const contactNumberInput = document.getElementById('contact-number');
 
   const today = new Date().toISOString().split('T')[0];
   if (dateInput) {
     dateInput.setAttribute('min', today);
+  }
+
+  // Only allow numbers in contact number input
+  if (contactNumberInput) {
+    contactNumberInput.addEventListener('input', function () {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
   }
 
   groupSizeSelect.addEventListener('change', () => {
@@ -101,6 +109,8 @@ function getCountryName(path) {
     const formData = new FormData(form);
     const groupSize = groupSizeSelect.value;
     const members = parseInt(membersInput.value, 10);
+    const budget = parseFloat(formData.get('budget'));
+    const contactNumber = contactNumberInput.value;
 
     if (!groupSize || !members || isNaN(members)) {
       alert('Please fill in all required fields correctly.');
@@ -119,6 +129,14 @@ function getCountryName(path) {
       alert('Group must be between 3 and 20 members.');
       return;
     }
+    if (isNaN(budget) || budget < 1500) {
+      alert('Budget must be at least ₱1,500.');
+      return;
+    }
+    if (!/^[0-9]{7,15}$/.test(contactNumber)) {
+      alert('Contact number must be 7 to 15 digits.');
+      return;
+    }
 
     let summaryHtml = `<ul>`;
     const addedKeys = new Set();
@@ -134,6 +152,8 @@ function getCountryName(path) {
       if (!value) displayValue = 'N/A';
 
       const labelMap = {
+        'full-name': 'Full Name',
+        'contact-number': 'Contact Number',
         'city': 'City or closest major city',
         'country': 'Country or Region',
         'travel-date': 'Travel Date',
