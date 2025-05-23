@@ -1,12 +1,13 @@
 :root {
-    --primary: #7fc4c9;
-    --secondary: #2b4a6b;
-    --accent: #4a708b;
-    --light: #f0f7f7;
-    --dark: #0d1a26;
-    --text: #333;
-    --text-light: #777;
+    --primary: #2a6f44;      
+    --secondary: #1e3a5f;     
+    --accent: #f2a365;        
+    --light: #e6f0ea; 
+    --dark: #172b3a;          
+    --text: #2f3e46;         
+    --text-light: #627d98;    
 }
+
 
 * {
     margin: 0;
@@ -101,6 +102,26 @@ h1, h2, h3, h4 {
   align-items: center;
 } 
 
+.book-now-btn {
+    background: #4285f4;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1rem 3rem;
+    border: none;
+    border-radius: 40px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transition: background 0.2s, transform 0.2s;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-align: center;
+}
+.book-now-btn:hover {
+    background: #3367d6;
+    transform: translateY(-2px) scale(1.03);
+    color: #fff;
+}
 
 /* Hero Section */
 .hero {
@@ -431,24 +452,7 @@ footer {
     color: rgba(255,255,255,0.6);
     font-size: 0.9rem;
 }
-.book-now-btn {
-    background: #91d4b2;
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
-    padding: 1rem 3rem;
-    border: none;
-    border-radius: 40px;
-    text-decoration: none;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    transition: background 0.2s, transform 0.2s;
-    letter-spacing: 1px;
-}
-.book-now-btn:hover {
-    background: #6bb98f;
-    transform: translateY(-2px) scale(1.03);
-    color: #fff;
-}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero h1 {
