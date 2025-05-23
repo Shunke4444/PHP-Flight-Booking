@@ -1,100 +1,161 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const bookingModal = document.getElementById('bookingModal');
-  const confirmationModal = document.getElementById('confirmationModal');
-  const closeBtns = document.querySelectorAll('.close-btn');
-  const bookNowBtns = document.querySelectorAll('.explore-btn, .travel-btn, .travel-planner-btn');
-  const bookingForm = document.getElementById('bookingForm');
+document.addEventListener('DOMContentLoaded', () => {
+  const svg = document.querySelector('.map-container svg');
+  const hoveredInput = document.getElementById('hovered-country');
+  const selectedInput = document.getElementById('selected-country');
+  const countryInput = document.getElementById('country');
+  const useCountryBtn = document.getElementById('useCountryBtn');
+
+  if (!svg) {
+    console.error('SVG not found in .map-container');
+    return;
+  }
+
+  // Initialize panzoom on SVG for pinch and scroll support
+  const panzoom = Panzoom(svg, {
+    maxScale: 5,
+    minScale: 1,
+    contain: 'none',
+  });
+  // Enable wheel zoom on desktop
+  svg.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+  // Make svg focusable for accessibility (optional)
+  svg.setAttribute('tabindex', 0);
+
+  const countries = svg.querySelectorAll('path');
+
+  countries.forEach(path => {
+    const originalFill = path.style.fill;
+
+    path.addEventListener('mouseenter', () => {
+      const titleElem = path.querySelector('title');
+      const countryName = titleElem ? titleElem.textContent.trim() : path.id || 'Unknown';
+      path.style.fill = 'yellow';
+      hoveredInput.value = countryName;
+    });
+
+    path.addEventListener('mouseleave', () => {
+      path.style.fill = originalFill || '';
+      hoveredInput.value = '';
+    });
+
+    path.addEventListener('click', () => {
+      const titleElem = path.querySelector('title');
+      const countryName = titleElem ? titleElem.textContent.trim() : path.id || '';
+
+      if (countryName) {
+        selectedInput.value = countryName;
+        countryInput.value = countryName;
+        countryInput.focus();
+      }
+    });
+  });
+
+  useCountryBtn?.addEventListener('click', () => {
+    if (hoveredInput.value) {
+      selectedInput.value = hoveredInput.value;
+      countryInput.value = hoveredInput.value;
+      countryInput.focus();
+    }
+  });
+
+  // Booking form logic
+  const form = document.getElementById('bookingForm');
+  const modal = document.getElementById('confirmationModal');
   const confirmationDetails = document.getElementById('confirmationDetails');
   const editBtn = document.getElementById('editBtn');
   const confirmBtn = document.getElementById('confirmBtn');
 
-  const travelDateInput = document.getElementById('travel-date');
-  if (travelDateInput) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const dd = String(today.getDate()).padStart(2, '0');
-    const minDate = `${yyyy}-${mm}-${dd}`;
-    travelDateInput.setAttribute('min', minDate);
+  const dateInput = document.getElementById('travel-date');
+  const groupSizeSelect = document.getElementById('group-size');
+  const membersInput = document.getElementById('members');
+
+  // Prevent past dates
+  const today = new Date().toISOString().split('T')[0];
+  if (dateInput) {
+    dateInput.setAttribute('min', today);
   }
 
-  function openModal(modal) {
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }
-
-  bookNowBtns.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      openModal(bookingModal);
-    });
-  });
-
-  closeBtns.forEach(btn => {
-    btn.addEventListener('click', function () {
-      const modal = this.closest('.modal');
-      closeModal(modal);
-    });
-  });
-
-  window.addEventListener('click', function (e) {
-    if (e.target.classList.contains('modal')) {
-      closeModal(e.target);
+  groupSizeSelect.addEventListener('change', () => {
+    const value = groupSizeSelect.value;
+    if (value === 'Solo') {
+      membersInput.value = 1;
+      membersInput.readOnly = true;
+    } else if (value === 'Couple') {
+      membersInput.value = 2;
+      membersInput.readOnly = true;
+    } else if (value === 'Group') {
+      membersInput.value = '';
+      membersInput.readOnly = false;
+    } else {
+      membersInput.value = '';
+      membersInput.readOnly = false;
     }
   });
 
-  bookingForm.addEventListener('submit', function (e) {
+  form.addEventListener('submit', e => {
     e.preventDefault();
 
-    const formData = {
-      city: document.getElementById('city').value,
-      country: document.getElementById('country').value,
-      travelDate: document.getElementById('travel-date').value,
-      groupSize: document.getElementById('group-size').value,
-      members: document.getElementById('members').value,
-      budget: document.getElementById('budget').value || 'Not specified',
-      activities: Array.from(document.querySelectorAll('input[name="activity"]:checked')).map(el => el.nextElementSibling.textContent).join(', '),
-      information: Array.from(document.querySelectorAll('input[name="info"]:checked')).map(el => el.nextElementSibling.textContent).join(', ')
-    };
+    const formData = new FormData(form);
+    const groupSize = groupSizeSelect.value;
+    const members = parseInt(membersInput.value, 10);
 
-    const formattedDate = formData.travelDate
-      ? new Date(formData.travelDate).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        })
-      : 'Not specified';
+    if (!groupSize || !members || isNaN(members)) {
+      alert('Please fill in all required fields correctly.');
+      return;
+    }
 
-    confirmationDetails.innerHTML = `
-      <p><strong>Destination:</strong> ${formData.city}, ${formData.country}</p>
-      <p><strong>Travel Date:</strong> ${formattedDate}</p>
-      <p><strong>Group Type:</strong> ${formData.groupSize}</p>
-      <p><strong>Number of Members:</strong> ${formData.members}</p>
-      <p><strong>Budget:</strong> ₱${formData.budget}</p>
-      <p><strong>Activities:</strong> ${formData.activities || 'None selected'}</p>
-      <p><strong>Information Needed:</strong> ${formData.information || 'None selected'}</p>
-    `;
+    if (groupSize === 'Solo' && members !== 1) {
+      alert('Solo selection must have 1 member.');
+      return;
+    }
+    if (groupSize === 'Couple' && members !== 2) {
+      alert('Couple selection must have 2 members.');
+      return;
+    }
+    if (groupSize === 'Group' && (members < 3 || members > 20)) {
+      alert('Group must be between 3 and 20 members.');
+      return;
+    }
 
-    closeModal(bookingModal);
-    openModal(confirmationModal);
+    let summaryHtml = `<ul>`;
+    const addedKeys = new Set();
+    for (let [key, value] of formData.entries()) {
+      if (addedKeys.has(key)) continue;
+      addedKeys.add(key);
+
+      let displayValue = value;
+      if (key === 'activity' || key === 'info') {
+        const allVals = formData.getAll(key);
+        displayValue = allVals.length > 0 ? allVals.join(', ') : 'None';
+      }
+      if (!value) displayValue = 'N/A';
+
+      const labelMap = {
+        'city': 'City or closest major city',
+        'country': 'Country or Region',
+        'travel-date': 'Travel Date',
+        'group-size': 'Group Size',
+        'members': 'Number of Members',
+        'budget': 'Budget (₱)',
+        'activity': 'Activities',
+        'info': 'Information Requested'
+      };
+
+      if (labelMap[key]) {
+        summaryHtml += `<li><strong>${labelMap[key]}:</strong> ${displayValue}</li>`;
+      }
+    }
+    summaryHtml += `</ul>`;
+    confirmationDetails.innerHTML = summaryHtml;
+    modal.style.display = 'flex';
   });
 
-  if (editBtn) {
-    editBtn.addEventListener('click', function () {
-      closeModal(confirmationModal);
-      openModal(bookingModal);
-    });
-  }
+  editBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 
-  if (confirmBtn) {
-    confirmBtn.addEventListener('click', function () {
-      alert('Your booking has been confirmed! Thank you for choosing our service.');
-      closeModal(confirmationModal);
-      bookingForm.reset();
-    });
-  }
+  confirmBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    alert('Booking confirmed! Thank you for your submission.');
+  });
 });

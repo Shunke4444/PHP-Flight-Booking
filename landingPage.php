@@ -1,16 +1,16 @@
 <?php
-session_start();
-if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
-    header("Location: login.php");
-    exit;
-}
+// session_start();
+// if (!isset($_SESSION["user_id"]) || !isset($_SESSION["username"])) {
+//     header("Location: login.php");
+//     exit;
+// }
 
-if (isset($_POST['logout'])) {
-    session_unset();
-    session_destroy();
-    header("Location: login.php");
-    exit;
-}
+// if (isset($_POST['logout'])) {
+//     session_unset();
+//     session_destroy();
+//     header("Location: login.php");
+//     exit;
+// }
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +35,9 @@ if (isset($_POST['logout'])) {
         </span>
         <span class="icon">
           <a href="#" class="nav-link travel-planner-btn"><i class="fa-solid fa-route"></i><span class="nav-text">Travel Planner</span></a>
+        </span>
+        <span class="icon">
+          <a href="destination.php" class="nav-link"><i class="fa-solid fa-globe"></i><span class="nav-text">Destination</span></a>
         </span>
       </div>  
       <div class="logo">
@@ -162,125 +165,6 @@ if (isset($_POST['logout'])) {
       <p>&copy; Copyright. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- Modal Structure -->
-  <main class="modal" id="bookingModal">
-    <section class="modal-content">
-      <span class="close-btn">&times;</span>
-      <h1>DESTINATION</h1>
-      <form id="bookingForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label>City or closest major city</label>
-            <input type="text" id="city" name="city" required>
-          </div>
-          <div class="form-group">
-            <label>Country or Region</label>
-            <input type="text" id="country" name="country" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Travel Date</label>
-            <input type="date" id="travel-date" name="travel-date" required>
-          </div>
-          <div class="form-group">
-            <label>Group Size</label>
-            <select id="group-size" name="group-size" required>
-              <option value="solo">Solo</option>
-              <option value="couple">Couple</option>
-              <option value="family">Family (3-5)</option>
-              <option value="group">Group (6+)</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Number of Members</label>
-            <input type="number" id="members" name="members" min="1" max="20" value="1" required>
-          </div>
-          <div class="form-group">
-            <label>Budget (₱)</label>
-            <input type="number" id="budget" name="budget" min="0" placeholder="Estimated budget">
-          </div>
-        </div>
-        <h2>ACTIVITY</h2>
-        <div class="checkbox-group">
-          <div class="checkbox-option">
-            <input type="checkbox" id="hiking" name="activity" value="hiking">
-            <label for="hiking">Hiking</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="mountain-biking" name="activity" value="mountain-biking">
-            <label for="mountain-biking">Mountain Biking</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="kayaking" name="activity" value="kayaking">
-            <label for="kayaking">Kayaking</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="skiing" name="activity" value="skiing">
-            <label for="skiing">Skiing</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="fishing" name="activity" value="fishing">
-            <label for="fishing">Fishing</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="surfing" name="activity" value="surfing">
-            <label for="surfing">Surfing</label>
-          </div>
-        </div>
-        <div class="divider"></div>
-        <h1>INFORMATION</h1>
-        <div class="checkbox-group">
-          <div class="checkbox-option">
-            <input type="checkbox" id="transportation" name="info" value="transportation">
-            <label for="transportation">Transportation</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="health" name="info" value="health">
-            <label for="health">Health</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="weather" name="info" value="weather">
-            <label for="weather">Weather</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="gear" name="info" value="gear">
-            <label for="gear">Gear</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="political-info" name="info" value="political-info">
-            <label for="political-info">Political Info</label>
-          </div>
-          <div class="checkbox-option">
-            <input type="checkbox" id="activity-specific" name="info" value="activity-specific">
-            <label for="activity-specific">Activity Specific</label>
-          </div>
-        </div>
-        <button type="submit" class="submit-btn">SUBMIT</button>
-      </form>
-    </section>
-  </main>
-
-
-  <!-- confirmation modal -->
-<section class="modal" id="confirmationModal">
-  <article class="modal-content">
-    <span class="close-btn">&times;</span>
-    <h2>Confirm Your Trip Details</h2>
-    
-    <div id="confirmationDetails" class="confirmation-details">
-    </div>
-    
-    <div class="confirmation-actions">
-      <button id="editBtn" class="edit-btn">Edit Details</button>
-      <button id="confirmBtn" class="confirm-btn">Confirm Booking</button>
-    </div>
-  </article>
-</section>
-
-  <script src="travelPlanner.js"></script>    
+  
 </body>
 </html>

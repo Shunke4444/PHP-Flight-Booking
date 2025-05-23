@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #567e6a;
+    --primary-color: #3367d6;
     --secondary-color: #34A853;
     --error-color: #EA4335;
     --text-color: #333;
@@ -167,7 +167,7 @@ input:focus {
 }
 
 .primary-btn {
-    background-color: #91d4b2;
+    background-color: #3367d6;
     color: white;
     border: none;
     padding: 15px;
@@ -181,7 +181,7 @@ input:focus {
 }
 
 .primary-btn:hover {
-    background-color: #6bb98f;
+    background-color: #19346e;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -262,7 +262,7 @@ input:focus {
 .close {
     color: #aaa;
     position: absolute;
-    right: 20px;
+    right: 20px;R
     top: 15px;
     font-size: 28px;
     font-weight: bold;

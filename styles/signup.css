@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #567e6a;;
+    --primary-color: #3367d6;
     --secondary-color: #34A853;
     --error-color: #EA4335;
     --text-color: #333;
@@ -156,7 +156,7 @@ input:focus {
 }
 
 .primary-btn {
-    background-color: #91d4b2;;
+    background-color: #3367d6;
     color: white;
     border: none;
     padding: 15px;
