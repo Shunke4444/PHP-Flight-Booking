@@ -11,6 +11,12 @@ if (isset($_POST['logout'])) {
     header("Location: login.php");
     exit;
 }
+
+if (isset($_SESSION['booking_session'])) {
+    unset($_SESSION["booking_session"]);
+    echo "<script>alert('Booking Success! Details sent to your email.')</script>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

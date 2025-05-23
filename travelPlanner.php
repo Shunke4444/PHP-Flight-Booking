@@ -11,6 +11,192 @@ if (isset($_POST['logout'])) {
     header("Location: login.php");
     exit;
 }
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = " accounts"; // Make sure this matches your database name
+    
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        echo "<script>showError('Database connection failed');</script>";
+        exit;
+    }
+
+    // Get form data
+    $name = $_POST['name'];
+    $contacts = $_POST['contacts'];
+    $city = $_POST['city'];
+    $country = $_POST['country'];
+    $travel_date = $_POST['travel-date'];
+    $group_size = $_POST['group-size'];
+    $members = (int)$_POST['members'];
+    $budget = !empty($_POST['budget']) ? (int)$_POST['budget'] : NULL;
+    $user_id = $_SESSION['user_id'];
+    
+    // 3. Main travel plan insert
+    $stmt = $conn->prepare("INSERT INTO travel_plans 
+                          (user_id, name, contacts, city, country_or_region, travel_date, group_size, num_members, budget) 
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    $stmt->bind_param("issssssii", $user_id, $name, $contacts, $city, $country, 
+                     $travel_date, $group_size, $members, $budget);
+
+    if ($stmt->execute()) {
+        $plan_id = $stmt->insert_id;
+        
+        // 4. Insert activities
+        if (!empty($_POST['activity'])) {
+            $activity_stmt = $conn->prepare("INSERT INTO travel_activities (plan_id, activity) VALUES (?, ?)");
+            foreach ($_POST['activity'] as $activity) {
+                $activity_stmt->bind_param("is", $plan_id, $activity);
+                $activity_stmt->execute();
+            }
+        }
+        
+        // 5. Insert information requests
+        if (!empty($_POST['info'])) {
+            $info_stmt = $conn->prepare("INSERT INTO travel_information (plan_id, info) VALUES (?, ?)");
+            foreach ($_POST['info'] as $info) {
+                $info_stmt->bind_param("is", $plan_id, $info);
+                $info_stmt->execute();
+            }
+        }
+        $stmt = $conn->prepare("SELECT email FROM user_info WHERE ID = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $stmt->bind_result($email);
+        $stmt->fetch();
+
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['MAIL_USERNAME'];
+            $mail->Password = $_ENV['MAIL_PASSWORD'];
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom($_ENV['MAIL_USERNAME'], $_ENV['MAIL_FROM_NAME']);
+            $mail->addAddress($email); // User's email from form/session
+            $mail->Subject = 'Your Travel Booking Confirmation';
+            
+            // Build the HTML email body with all booking details
+            $mail->isHTML(true);
+            $mail->Body = '
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                    .header { background-color: #007bff; color: white; padding: 15px; text-align: center; }
+                    .content { padding: 20px; border: 1px solid #ddd; }
+                    .detail-row { margin-bottom: 10px; }
+                    .detail-label { font-weight: bold; display: inline-block; width: 180px; }
+                    .footer { margin-top: 20px; font-size: 12px; color: #777; text-align: center; }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h2>Travel Booking Confirmation</h2>
+                    </div>
+                    <div class="content">
+                        <p>Dear ' . htmlspecialchars($_POST['name']) . ',</p>
+                        <p>Thank you for booking with us! Here are your travel details:</p>
+                        
+                        <div class="detail-row">
+                            <span class="detail-label">Booking Reference:</span>
+                            <span>' . htmlspecialchars($booking_reference) . '</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Travel Date:</span>
+                            <span>' . htmlspecialchars($_POST['travel-date']) . '</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Destination:</span>
+                            <span>' . htmlspecialchars($_POST['city']) . ', ' . htmlspecialchars($_POST['country']) . '</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Group Size:</span>
+                            <span>' . htmlspecialchars($_POST['group-size']) . ' (' . htmlspecialchars($_POST['members']) . ' people)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Budget:</span>
+                            <span>₱' . number_format($_POST['budget'], 2) . '</span>
+                        </div>';
+            
+            // Add activities if selected
+            if (!empty($_POST['activity'])) {
+                $mail->Body .= '
+                        <div class="detail-row">
+                            <span class="detail-label">Activities:</span>
+                            <span>' . implode(', ', array_map('htmlspecialchars', $_POST['activity'])) . '</span>
+                        </div>';
+            }
+            
+            // Add information requested if selected
+            if (!empty($_POST['info'])) {
+                $mail->Body .= '
+                        <div class="detail-row">
+                            <span class="detail-label">Information Requested:</span>
+                            <span>' . implode(', ', array_map('htmlspecialchars', $_POST['info'])) . '</span>
+                        </div>';
+            }
+            
+            $mail->Body .= '
+                        <p>If you have any questions about your booking, please contact us at support@compasswebsite.com</p>
+                    </div>
+                    <div class="footer">
+                        <p>© ' . date('Y') . ' Compass Website. All rights reserved.</p>
+                    </div>
+                </div>
+            </body>
+            </html>';
+            
+            // Plain text version for non-HTML email clients
+            $mail->AltBody = "Travel Booking Confirmation\n\n" .
+                "Dear " . $_POST['name'] . ",\n\n" .
+                "Thank you for booking with us! Here are your travel details:\n\n" .
+                "Booking Reference: " . $booking_reference . "\n" .
+                "Travel Date: " . $_POST['travel-date'] . "\n" .
+                "Destination: " . $_POST['city'] . ", " . $_POST['country'] . "\n" .
+                "Group Size: " . $_POST['group-size'] . " (" . $_POST['members'] . " people)\n" .
+                "Budget: ₱" . number_format($_POST['budget'], 2) . "\n" .
+                (!empty($_POST['activity']) ? "Activities: " . implode(', ', $_POST['activity']) . "\n" : "") .
+                (!empty($_POST['info']) ? "Information Requested: " . implode(', ', $_POST['info']) . "\n" : "") .
+                "\nIf you have any questions about your booking, please contact us at support@yourtravelsite.com\n\n" .
+                "© " . date('Y') . " Your Travel Company. All rights reserved.";
+
+            $mail->send();
+        } catch (Exception $e) {
+            error_log("Email error: {$mail->ErrorInfo}");
+            // You might want to handle this error differently in production
+        }
+        
+        $conn->close();
+        
+        header("Location: landingPage.php");
+    } else {
+        // 7. Error handling
+        echo "<script>alert('Error: ".$conn->error."')</script>";
+    }
+    
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
@@ -74,16 +260,16 @@ if (isset($_POST['logout'])) {
     <!-- Booking Section -->
  <section class="booking-form">
   <h1>DESTINATION</h1>
-  <form id="bookingForm">
+  <form id="bookingForm" method="post">
     <!-- New: Personal Info -->
     <div class="form-row">
       <div class="form-group">
         <label for="full-name">Full Name</label>
-        <input type="text" id="full-name" name="full-name" required />
+        <input type="text" id="full-name" name="name" required />
       </div>
       <div class="form-group">
         <label for="contact-number">Contact Number</label>
-        <input type="tel" id="contact-number" name="contact-number" pattern="[0-9+ ]{7,15}" placeholder="e.g. +639123456789" required />
+        <input type="tel" id="contact-number" name="contacts" pattern="[0-9+ ]{7,15}" placeholder="e.g. +639123456789" required />
       </div>
     </div>
     <!-- Existing fields below -->
@@ -125,27 +311,27 @@ if (isset($_POST['logout'])) {
     <h2>ACTIVITY</h2>
     <div class="checkbox-group">
       <div class="checkbox-option">
-        <input type="checkbox" id="hiking" name="activity" value="hiking" />
+        <input type="checkbox" id="hiking" name="activity[]" value="hiking" />
         <label for="hiking">Hiking</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="mountain-biking" name="activity" value="mountain-biking" />
+        <input type="checkbox" id="mountain-biking" name="activity[]" value="mountain-biking" />
         <label for="mountain-biking">Mountain Biking</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="kayaking" name="activity" value="kayaking" />
+        <input type="checkbox" id="kayaking" name="activity[]" value="kayaking" />
         <label for="kayaking">Kayaking</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="skiing" name="activity" value="skiing" />
+        <input type="checkbox" id="skiing" name="activity[]" value="skiing" />
         <label for="skiing">Skiing</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="fishing" name="activity" value="fishing" />
+        <input type="checkbox" id="fishing" name="activity[]" value="fishing" />
         <label for="fishing">Fishing</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="surfing" name="activity" value="surfing" />
+        <input type="checkbox" id="surfing" name="activity[]" value="surfing" />
         <label for="surfing">Surfing</label>
       </div>
     </div>
@@ -153,47 +339,46 @@ if (isset($_POST['logout'])) {
     <h1>INFORMATION</h1>
     <div class="checkbox-group">
       <div class="checkbox-option">
-        <input type="checkbox" id="transportation" name="info" value="transportation" />
+        <input type="checkbox" id="transportation" name="info[]" value="transportation" />
         <label for="transportation">Transportation</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="health" name="info" value="health" />
+        <input type="checkbox" id="health" name="info[]" value="health" />
         <label for="health">Health</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="weather" name="info" value="weather" />
+        <input type="checkbox" id="weather" name="info[]" value="weather" />
         <label for="weather">Weather</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="gear" name="info" value="gear" />
+        <input type="checkbox" id="gear" name="info[]" value="gear" />
         <label for="gear">Gear</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="political-info" name="info" value="political-info" />
+        <input type="checkbox" id="political-info" name="info[]" value="political-info" />
         <label for="political-info">Political Info</label>
       </div>
       <div class="checkbox-option">
-        <input type="checkbox" id="activity-specific" name="info" value="activity-specific" />
+        <input type="checkbox" id="activity-specific" name="info[]" value="activity-specific" />
         <label for="activity-specific">Activity Specific</label>
       </div>
     </div>
-    <button type="submit" class="submit-btn">SUBMIT</button>
+    <button type="submit" class="submit-btn" id="submitBtn">SUBMIT</button>
   </form>
 </section>
 
     <!-- Modal popup for confirmation -->
-    <div id="confirmationModal" class="modal" style="display:none;">
+    <!-- <div id="confirmationModal" class="modal" style="display:none;">
       <div class="modal-content">
         <h2>Confirm Your Trip Details</h2>
         <div id="confirmationDetails"></div>
         <div class="modal-actions">
           <button id="editBtn">Edit Details</button>
-          <button id="confirmBtn">Confirm Booking</button>
+          <button type="submit" name="" id="confirmBtn">Confirm Booking</button>
         </div>
       </div>
     </div>
-  </div>
-
+  </div> -->
   <script src="travelPlanner.js"></script>
 </body>
 </html>

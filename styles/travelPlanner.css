@@ -368,6 +368,9 @@ body {
   background: var(--input-bg);
   transition: var(--transition);
   cursor: pointer;
+  user-select: none;
+  width: fit-content;
+  position: relative;
 }
 
 .checkbox-option:hover {
@@ -385,6 +388,13 @@ body {
   cursor: pointer;
   position: relative;
   margin: 0;
+  z-index: 2;
+}
+.checkbox-option label {
+  cursor: pointer;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
 }
 
 .checkbox-option input[type="checkbox"]:checked {

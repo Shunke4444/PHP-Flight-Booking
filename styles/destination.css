@@ -341,6 +341,37 @@ body {
 
 
 @media (max-width: 768px) {
+    .navbar {
+    flex-direction: row;
+    padding: 12px 10px;
+    gap: 10px;
+  }
+  .nav-left, .nav-right {
+    gap: 10px;
+  }
+  .nav-text {
+    display: none;
+  }
+  .logout i {
+    margin-left: 4px;
+  }
+  .icon i {
+    background: rgb(48, 98, 121);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    box-shadow: 0 2px 8px rgba(46,204,113,0.08);
+    transition: background 0.2s;
+    padding: 0;
+  }
+  .icon i:hover {
+    background: rgb(27, 55, 68);
+  }
     .hotel-cards {
         grid-template-columns: 1fr;
     }

@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -71,13 +71,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h2>Change Password</h2>
                 
                 <p class="divider">Or use your email to log in</p>
-                
-                <div class="form-group">
-                    <input type="password" id="password" name="password" placeholder="Password" required>
+
+                <div class="form-group password-group">
+                    <input type="password" id="passwordSignUp" name="password" placeholder="Password" required>
+                    <span class="toggle-password" toggle="#passwordSignUp">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
-                
-                <div class="form-group">
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                <div class="form-group password-group">
+                    <input type="password" id="confirm_passwordSignUp" name="confirm_password" placeholder="Confirm Password" required>
+                    <span class="toggle-password" toggle="#confirm_passwordSignUp">
+                        <i class="fa fa-eye"></i>
+                    </span>
                 </div>
                 <button type="submit" class="primary-btn">Reset</button>
             </form>
@@ -86,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="welcome-panel">
             <span class="welcome-content">
                 <h1>Welcome Back!</h1>
-                <p>We're happy to see you again. Let's get you signed in. Put vector here.</p>
+                <p>We're happy to see you again. Let's get you signed in.</p>
             </span>
         </section>
     </main>
