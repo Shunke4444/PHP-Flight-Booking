@@ -23,32 +23,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const countries = svg.querySelectorAll('path');
 
-  countries.forEach(path => {
-    const originalFill = path.style.fill;
+countries.forEach(path => {
+  const originalFill = path.style.fill;
 
-    path.addEventListener('mouseenter', () => {
-      const titleElem = path.querySelector('title');
-      const countryName = titleElem ? titleElem.textContent.trim() : path.id || 'Unknown';
-      path.style.fill = 'yellow';
-      hoveredInput.value = countryName;
-    });
+function getCountryName(path) {
+  // Use the title attribute if present (your SVG uses this)
+  if (path.hasAttribute('title') && path.getAttribute('title').trim()) {
+    return path.getAttribute('title').trim();
+  }
+  // Fallback to id
+  return path.id || 'Unknown';
+}
 
-    path.addEventListener('mouseleave', () => {
-      path.style.fill = originalFill || '';
-      hoveredInput.value = '';
-    });
-
-    path.addEventListener('click', () => {
-      const titleElem = path.querySelector('title');
-      const countryName = titleElem ? titleElem.textContent.trim() : path.id || '';
-
-      if (countryName) {
-        selectedInput.value = countryName;
-        countryInput.value = countryName;
-        countryInput.focus();
-      }
-    });
+  path.addEventListener('mouseenter', () => {
+    const countryName = getCountryName(path);
+    path.style.fill = 'yellow';
+    hoveredInput.value = countryName;
   });
+
+  path.addEventListener('mouseleave', () => {
+    path.style.fill = originalFill || '';
+    hoveredInput.value = '';
+  });
+
+  path.addEventListener('click', () => {
+    const countryName = getCountryName(path);
+    if (countryName) {
+      selectedInput.value = countryName;
+      countryInput.value = countryName;
+      countryInput.focus();
+    }
+  });
+});
 
   useCountryBtn?.addEventListener('click', () => {
     if (hoveredInput.value) {
