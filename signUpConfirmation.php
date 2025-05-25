@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <section class="form-panel">
             <form id="registrationForm" method="post">
-                <h2>Forgot Password</h2>
+                <h2>Confirm Email</h2>
                 
                 <p class="divider">The code has sent to <?php echo $_SESSION['signup_email']; ?></p>
                 

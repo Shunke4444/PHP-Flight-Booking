@@ -230,16 +230,23 @@ input:focus {
     display: none;
     position: fixed;
     z-index: 100;
-    left: 0;
-    top: 0;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
+    /* Remove margin-bottom and use flex to center */
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    /* Remove margin and use flex centering from .modal */
+    margin: 0;
     padding: 25px;
     border: none;
     width: 90%;
@@ -249,7 +256,6 @@ input:focus {
     text-align: center;
     position: relative;
 }
-
 .close {
     color: #aaa;
     position: absolute;
@@ -289,6 +295,133 @@ input:focus {
     border-top: 5px solid var(--error-color);
 }
 
+/* Terms Checkbox Styles */
+.terms-group {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+}
+
+.terms-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 12px;
+    margin-top: 3px;
+    accent-color: var(--primary-color);
+}
+
+.terms-group label {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+    color: #2a56b7;
+}
+
+/* Terms Modal Styles */
+.terms-modal-content {
+    max-width: 600px;
+    padding: 30px;
+}
+
+.terms-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--medium-gray);
+}
+
+.terms-header h2 {
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.last-updated {
+    color: var(--dark-gray);
+    font-size: 0.85rem;
+}
+
+.terms-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 15px;
+    margin: 20px 0;
+}
+
+.terms-section {
+    margin-bottom: 25px;
+}
+
+.terms-section h3 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.terms-section p {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding-left: 32px;
+}
+
+.terms-footer {
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.agree-btn {
+    background-color: var(--secondary-color);
+    padding: 12px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.agree-btn:hover {
+    background-color: #2d9246;
+}
+
+/* Scrollbar styling for terms */
+.terms-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terms-body::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
+.terms-body::-webkit-scrollbar-thumb {
+    background: var(--medium-gray);
+    border-radius: 10px;
+}
+
+.terms-body::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-gray);
+}
+
 @media (max-width: 600px) {
     .fullscreen-container {
         flex-direction: column;
@@ -297,8 +430,6 @@ input:focus {
     }
     .welcome-panel {
         border-radius: 0;
-        border-top-right-radius: 40px;
-        border-bottom-right-radius: 40px;
         min-height: 180px;
     }
     .form-panel {
@@ -307,6 +438,22 @@ input:focus {
         border-bottom-left-radius: 40px;
         min-height: 180px;
     }
+    
+    .modal {
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+    }
+    .modal-content {
+        max-width: 95vw;
+        width: 80vw;
+        min-width: unset;
+        margin: 0;
+        left: 40%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
 }
 
 @media (max-width: 480px) {

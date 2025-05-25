@@ -6,12 +6,12 @@ function showError(message) {
         errorModal.style.display = 'block';
     }
 }
-function showSuccess() {
-    const successModal = document.getElementById('successModal');
-    if (successModal) {
-        successModal.style.display = 'block';
-    }
-}
+// function showSuccess() {
+//     const successModal = document.getElementById('successModal');
+//     if (successModal) {
+//         successModal.style.display = 'block';
+//     }
+// }
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registrationForm');

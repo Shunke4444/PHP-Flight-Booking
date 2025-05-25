@@ -368,7 +368,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </section>
 
     <!-- Modal popup for confirmation -->
-    <!-- <div id="confirmationModal" class="modal" style="display:none;">
+    <div id="confirmationModal" class="modal" style="display:none;">
       <div class="modal-content">
         <h2>Confirm Your Trip Details</h2>
         <div id="confirmationDetails"></div>
@@ -378,7 +378,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
   <script src="travelPlanner.js"></script>
 </body>
 </html>

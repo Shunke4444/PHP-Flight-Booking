@@ -117,6 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Email error: {$mail->ErrorInfo}";
             }
             header("Location: signUpConfirmation.php");
+            exit;
 
 
             $sql = "INSERT INTO user_info (username, email, password, conf_password)
@@ -194,6 +195,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <i class="fa fa-eye"></i>
                     </span>
                 </div>
+                
+                <!-- Inside your form, before the submit button -->
+<div class="form-group terms-group">
+    <input type="checkbox" id="terms" name="terms" required>
+    <label for="terms">I agree to the <a href="#" id="termsLink" class="terms-link">Terms and Conditions</a></label>
+</div>
 
                 <button type="submit" class="primary-btn">Sign Up</button>                
                 <div class="login-prompt">
@@ -220,6 +227,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button class="modal-btn">OK</button>
         </div>
     </article>
+
+    <article id="termsModal" class="modal">
+    <div class="modal-content terms-modal-content">
+        <span class="close">&times;</span>
+        <div class="terms-header">
+            <h2><i class="fas fa-file-contract"></i> Terms and Conditions</h2>
+            <p class="last-updated">Last updated: June 2024</p>
+        </div>
+        <div class="terms-body">
+            <div class="terms-section">
+                <h3><i class="fas fa-check-circle"></i> Acceptance of Terms</h3>
+                <p>By creating an account, you agree to be bound by these Terms and Conditions and our Privacy Policy. If you don't agree, please don't use our services.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h3><i class="fas fa-user-shield"></i> Account Responsibilities</h3>
+                <p>You're responsible for maintaining the confidentiality of your account credentials and for all activities under your account. Notify us immediately of any unauthorized use.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h3><i class="fas fa-lock"></i> Privacy and Data</h3>
+                <p>We collect and use your information as described in our Privacy Policy. By using our services, you consent to this data collection and processing.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h3><i class="fas fa-ban"></i> Prohibited Conduct</h3>
+                <p>You agree not to: (a) violate laws; (b) impersonate others; (c) interfere with our services; (d) attempt unauthorized access; (e) harass other users.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h3><i class="fas fa-gavel"></i> Termination</h3>
+                <p>We may suspend or terminate your account if you violate these terms. You may terminate your account at any time by contacting us.</p>
+            </div>
+            
+            <div class="terms-section">
+                <h3><i class="fas fa-exchange-alt"></i> Changes to Terms</h3>
+                <p>We may modify these terms at any time. Continued use after changes constitutes acceptance. We'll notify you of significant changes.</p>
+            </div>
+        </div>
+        <div class="terms-footer">
+            <button class="modal-btn agree-btn"><i class="fas fa-check"></i> I Understand</button>
+        </div>
+    </div>
+</article>
 
  
     <script src="script.js"></script>
